@@ -1,0 +1,33 @@
+:root {
+ --main-color: #fa5b4d;
+ --background-color: #faf9f0;
+}
+body {
+ font-family: 'Georgia';
+ background-color: --background-color;
+ color: #444;
+}
+.main-content {
+ float: left;
+ width: 300px;
+ 
+ p
+  margin-bottom: 20px;
+
+}
+
+.sidebar {
+ float: left;
+ width: 200px;
+ .widget {
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+  background-color: --background-color;
+   -webkit-box-shadow: 10px 18px 5px 0px rgba(0,0,0,0.48);
+   -moz-box-shadow: 10px 18px 5px 0px rgba(0,0,0,0.48);
+   box-shadow: 10px 18px 5px 0px rgba(0,0,0,0.48);
+
+}
+}
+

@@ -1,0 +1,24 @@
+extends layout
+
+block pageTitle
+ .jumbotron
+  h1 Main Page
+  h2 Welcome! Things are coming together!
+block pageContent
+
+
+
+
+ .dropdown
+  a(href="#", data-toggle'"dropdown").dropdown-toggle Dropdown trigger
+  ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+   li
+    a(href='#', tabindex='-1') Action
+   li
+    a(href='#', tabindex='-1') Something else here
+   li.divider
+   li
+    a(href='#', tabindex='-1') Separated link
+ script.
+  $('.dropdown-toggle').dropdown()
+  
