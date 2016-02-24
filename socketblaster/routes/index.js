@@ -11,5 +11,7 @@ router.get('/about', function(req, res, next) {
 router.get('/WebGLTest', function(req, res, next) {
 	res.render('GameIndex', {title: 'WebGL Test'});
 });
-
+router.get('/JessWebGLTest', function(req, res, next) {
+	res.render('GameIndex2', {title: 'WebGL Test Two'});
+});
 module.exports = router;
