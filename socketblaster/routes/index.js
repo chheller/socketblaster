@@ -8,5 +8,8 @@ router.get('/', function(req, res, next) {
 router.get('/about', function(req, res, next) {
   res.render('about', { title: 'About' });
 });
+router.get('/WebGLTest', function(req, res, next) {
+	res.render('GameIndex', {title: 'WebGL Test'});
+});
 
 module.exports = router;
