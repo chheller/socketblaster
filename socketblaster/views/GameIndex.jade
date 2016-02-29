@@ -6,7 +6,7 @@ block pageTitle
     div.col-md-4.jumbotron.text-center Game can take a while to load, please be patient!
     div.col-md-4
 block pageContent
-  script(src='TemplateData/UnityProgress.js') 
+  script(src="TemplateData/UnityProgress.js") 
   div.jumbotron
     body.template
       p.header
@@ -14,22 +14,22 @@ block pageContent
           div.row
             div.col-md-3
             div.col-md-6
-              canvas#canvas.emscripten(oncontextmenu='event.preventDefault()', height='600px', width='960px') 
+              canvas#canvas.emscripten(oncontextmenu="event.preventDefault()", height="600px", width="960px") 
               div.col-md-3 
               br
             div.row
               div.col-md-9
               div.col-md-3
                 .fullscreen
-                img(src='TemplateData/fullscreen.png', width='38', height='38', alt='Fullscreen', title='Fullscreen', onclick='SetFullscreen(1);')        
+                img(src="TemplateData/fullscreen.png", width="38", height="38", alt="Fullscreen", title="Fullscreen", onclick="SetFullscreen(1);")        
                 .logo   
-    script(type='text/javascript').
+    script(type="text/javascript").
       var Module = {
       TOTAL_MEMORY: 268435456,
-      errorhandler: null,			// arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+      errorhandler: null,			// arguments: err, url, line. This function must return "true" if the error is handled, otherwise "false"
       compatibilitycheck: null,
       dataUrl: "Games/WebGLTest/Release/WebGL Build.data",
       codeUrl: "Games/WebGLTest/Release/WebGL Build.js",
       memUrl: "Games/WebGLTest/Release/WebGL Build.mem",
       };
-    script(src='Games/WebGLTest/Release/UnityLoader.js')
+    script(src="Games/WebGLTest/Release/UnityLoader.js")

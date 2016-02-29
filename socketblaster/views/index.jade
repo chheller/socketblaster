@@ -1,38 +1,69 @@
 extends layout
 block pageTitle
- .container
-  div.row
-   div.col-hg-12
-    #myCarousel.carousel.slide(data-ride='carousel')
-     .carousel-inner
-      .item.active
-       img(src='images/carousel1.jpg',alt='first slide', style='width:1200px;height=600px')
-      .item
-       img(src='images/carousel2.jpg',alt='second slide', style='width:1200px;height=600px')
-      .item
-       img(src='images/carousel3.jpg',alt='third slide', width='1200px', max-height='600px')
-    
-     ol.carousel-indicators
-      li.active(data-target='#myCarousel', data-slide-to='0')
-      li(data-target='#myCarousel', data-slide-to='1')
-      li(data-target='#myCarousel', data-slide-to='2')
-     a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
-      span.glyphicon.glyphicon-chevron-left
-     a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
-      span.glyphicon.glyphicon-chevron-right
+	.container
+		div.row
+			div.col-md-3
+				form(name="login", action="/login", method="post")
+					h3(class="form-signin-heading") Sign in
+					input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
+					input(type="password", id="inputpassword", class="form-control", placeholder="Password")
+					br
+					input(type="submit", value="login", class="btn btn-lg btn-primary btn-block")
+				form(name="register", action="/register", method="post")
+					h3(class="form-signin-heading") New? Signup today!
+					input(type="fname", id="inputfname", class="form-control", placeholder="First Name")
+					input(type="lname", id="inputlname", class="form-control", placeholder="Last Name")
+					input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
+					input(type="password", id="inputpassword", class="form-control", placeholder="Password")
+					input(type="passwordconf", id="inputpasswordconf", class="form-control", placeholder="Re-enter Password")
+					br
+					input(type="submit", value="register", class="btn btn-lg btn-primary btn-block")
+			div.col-md-9
+				br
+				br
+				br
+				br
+				#myCarousel.carousel.slide(data-ride="carousel")
+					.carousel-inner
+						.item.active
+							img(src="http://placehold.it/1200x600",alt="first slide")
+						.item
+							img(src="http://placehold.it/1200x600",alt="second slide")
+						.item
+							img(src="http://placehold.it/1200x600",alt="third slide")
+
+					ol.carousel-indicators
+						li.active(data-target="#myCarousel", data-slide-to="0")
+						li(data-target="#myCarousel", data-slide-to="1")
+						li(data-target="#myCarousel", data-slide-to="2")
+					a.left.carousel-control(href="#myCarousel", role="button", data-slide="prev")
+						span.glyphicon.glyphicon-chevron-left
+					a.right.carousel-control(href="#myCarousel", role="button", data-slide="next")
+						span.glyphicon.glyphicon-chevron-right
+
 
 block pageContent
- .container  
-  br
-  div.row  
-   div.col-md-3.bg-success Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum finibus quam et finibus. Duis quis volutpat sapien. Donec imperdiet metus arcu, in porttitor tellus venenatis id. Curabitur rutrum commodo velit, eu imperdiet dui suscipit ac. Pellentesque at nisl in purus ullamcorper mollis eget ut tellus. Nam a tellus quis enim eleifend maximus. Sed venenatis, sapien id feugiat facilisis, lacus ex malesuada justo, sit amet lobortis ligula sapien egestas lorem. Nunc eget enim in lectus dictum maximus ut sed odio. In varius erat nisi, et fringilla neque convallis at. Praesent et enim sit amet purus aliquet ornare et ut urna. Suspendisse non arcu sapien. Integer venenatis et lectus quis ultrices. Ut convallis iaculis tellus eget pulvinar. Maecenas consequat ligula sed pellentesque semper.
-   div.col-md-6
-   div.col-md-3.bg-success Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum finibus quam et finibus. Duis quis volutpat sapien. Donec imperdiet metus arcu, in porttitor tellus venenatis id. Curabitur rutrum commodo velit, eu imperdiet dui suscipit ac. Pellentesque at nisl in purus ullamcorper mollis eget ut tellus. Nam a tellus quis enim eleifend maximus. Sed venenatis, sapien id feugiat facilisis, lacus ex malesuada justo, sit amet lobortis ligula sapien egestas lorem. Nunc eget enim in lectus dictum maximus ut sed odio. In varius erat nisi, et fringilla neque convallis at. Praesent et enim sit amet purus aliquet ornare et ut urna. Suspendisse non arcu sapien. Integer venenatis et lectus quis ultrices. Ut convallis iaculis tellus eget pulvinar. Maecenas consequat ligula sed pellentesque semper.
-  br
-  br
-  div.row   
-  .jumbotron
-   .text-center Here's a convenient break in the page
-  div.row
-   div.col-md-12.bg-warning Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum finibus quam et finibus. Duis quis volutpat sapien. Donec imperdiet metus arcu, in porttitor tellus venenatis id. Curabitur rutrum commodo velit, eu imperdiet dui suscipit ac. Pellentesque at nisl in purus ullamcorper mollis eget ut tellus. Nam a tellus quis enim eleifend maximus. Sed venenatis, sapien id feugiat facilisis, lacus ex malesuada justo, sit amet lobortis ligula sapien egestas lorem. Nunc eget enim in lectus dictum maximus ut sed odio. In varius erat nisi, et fringilla neque convallis at. Praesent et enim sit amet purus aliquet ornare et ut urna. Suspendisse non arcu sapien. Integer venenatis et lectus quis ultrices. Ut convallis iaculis tellus eget pulvinar. Maecenas consequat ligula sed pellentesque semper.
-  br
+	br
+	.container
+		div.row
+				div.col-sm-4
+					div.thumbnail
+						img(src="http://placehold.it/320x150")
+						div.caption
+							h4(class="pull-right")$24.99
+							h4 First Product
+							p See more
+				div.col-sm-4
+					div.thumbnail
+						img(src="http://placehold.it/320x150")
+						div.caption
+							h4(class="pull-right")$24.99
+							h4 Second Product
+							p See more
+				div.col-sm-4
+					div.thumbnail
+						img(src="http://placehold.it/320x150")
+						div.caption
+							h4(class="pull-right")$24.99
+							h4 Third Product
+							p See more
