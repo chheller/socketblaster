@@ -1,4 +1,12 @@
 extends layout
+mixin storeItem(source, name, price, description)
+	div.col-sm-4
+		div.thumbnail
+			img(src=source)
+			div.caption
+				h4(class="pull-right")=price
+				h4=name
+				p=description
 block pageTitle
 	.container
 		div.row
@@ -46,24 +54,12 @@ block pageContent
 	br
 	.container
 		div.row
-				div.col-sm-4
-					div.thumbnail
-						img(src="http://placehold.it/320x150")
-						div.caption
-							h4(class="pull-right")$24.99
-							h4 First Product
-							p See more
-				div.col-sm-4
-					div.thumbnail
-						img(src="http://placehold.it/320x150")
-						div.caption
-							h4(class="pull-right")$24.99
-							h4 Second Product
-							p See more
-				div.col-sm-4
-					div.thumbnail
-						img(src="http://placehold.it/320x150")
-						div.caption
-							h4(class="pull-right")$24.99
-							h4 Third Product
-							p See more
+			+storeItem("http://placehold.it/320x150", "First Item", "$24.99", "See More")
+			+storeItem("http://placehold.it/320x150", "Second Item", "$24.99", "See More")
+			+storeItem("http://placehold.it/320x150", "Third Item", "$24.99", "See More")
+	.container
+		div.row
+			+storeItem("http://placehold.it/320x150", "Fourth Item", "$24.99", "See More")
+			+storeItem("http://placehold.it/320x150", "Fifth Item", "$24.99", "See More")
+			+storeItem("http://placehold.it/320x150", "Sixth Item", "$24.99", "See More")
+
