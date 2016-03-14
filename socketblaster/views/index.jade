@@ -17,15 +17,16 @@ block pageTitle
 					input(type="password", id="inputpassword", class="form-control", placeholder="Password")
 					br
 					input(type="submit", value="login", class="btn btn-lg btn-primary btn-block")
-				form(name="register", action="/register", method="post")
-					h3(class="form-signin-heading") New? Signup today!
-					input(type="fname", id="inputfname", class="form-control", placeholder="First Name")
-					input(type="lname", id="inputlname", class="form-control", placeholder="Last Name")
-					input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
+
+				h3(class="form-signin-heading") New? Signup today!
+				#addUser
+					input#inputUserName(type='text', placeholder='Username', class="form-control")
+					input#inputUserEmail(type='text', placeholder='Email Address', class="form-control")
+					input#inputUserFullname(type='text', placeholder='Full Name', class="form-control")
 					input(type="password", id="inputpassword", class="form-control", placeholder="Password")
 					input(type="passwordconf", id="inputpasswordconf", class="form-control", placeholder="Re-enter Password")
 					br
-					input(type="submit", value="register", class="btn btn-lg btn-primary btn-block")
+					button#btnAddUser(class="btn btn-lg btn-primary btn-block") Register
 			div.col-md-9
 				br
 				br
@@ -52,6 +53,20 @@ block pageTitle
 
 block pageContent
 	br
+	div.row.container
+		div.col-md-4
+		div.col-md-4
+			// USER LIST
+			h2 User List
+			#userList
+					table
+							thead
+									th UserName
+									th Email
+									th Delete?
+							tbody
+			// /USER LIST
+		div.col-md-4
 	.container
 		div.row
 			+storeItem("http://placehold.it/320x150", "First Item", "$24.99", "See More")
@@ -62,4 +77,3 @@ block pageContent
 			+storeItem("http://placehold.it/320x150", "Fourth Item", "$24.99", "See More")
 			+storeItem("http://placehold.it/320x150", "Fifth Item", "$24.99", "See More")
 			+storeItem("http://placehold.it/320x150", "Sixth Item", "$24.99", "See More")
-
