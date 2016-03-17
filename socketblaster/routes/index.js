@@ -17,4 +17,7 @@ router.get('/JessWebGLTest', function(req, res, next) {
 router.get('/dbtest', function(req, res, next) {
   res.render('dbtest', { title: 'DB TEST' });
 });
+router.get('/createlisting', function(req, res, next) {
+  res.render('createlisting', { title: 'Create Listing' });
+});
 module.exports = router;
