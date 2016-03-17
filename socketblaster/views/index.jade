@@ -10,13 +10,13 @@ mixin storeItem(source, name, price, description)
 block pageTitle
 	.container
 		div.row
-			div.col-md-3
+			#login.col-md-3
 				form(name="login", action="/login", method="post")
 					h3(class="form-signin-heading") Sign in
 					input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
 					input(type="password", id="inputpassword", class="form-control", placeholder="Password")
 					br
-					input(type="submit", value="login", class="btn btn-lg btn-primary btn-block")
+					input(type="submit", value="login", class="btn btn-lg btn-primary btn-block", id="loginButton")
 
 				h3(class="form-signin-heading") New? Signup today!
 				#addUser
