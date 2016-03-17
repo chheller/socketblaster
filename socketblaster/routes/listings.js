@@ -1,0 +1,41 @@
+var express = require('express');
+var router = express.Router();
+
+/*
+ * GET listings.
+ */
+router.get('/listings', function(req, res) {
+    var db = req.db;
+    var collection = db.get('listings');
+    collection.find({},{},function(e,docs){
+        res.json(docs);
+    });
+});
+
+/*
+ * POST to addlisting.
+ */
+router.post('/addlisting', function(req, res) {
+    var db = req.db;
+    var collection = db.get('listings');
+    collection.insert(req.body, function(err, result){
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+    });
+})
+
+/*
+ * DELETE to deletelisting.
+ */
+router.delete('/deletelisting/:id', function(req, res) {
+    var db = req.db;
+    var collection = db.get('listings');
+    var userToDelete = req.params.id;
+    collection.remove({ '_id' : userToDelete }, function(err) {
+        res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
+    });
+});
+
+
+module.exports = router;

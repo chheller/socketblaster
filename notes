@@ -23,6 +23,8 @@ mongod --dbpath ~/UARK/node/nodetest2/data  // to start database
 
 mongod --dbpath ~/node/socketblaster/data --smallfiles
 
+mongod --dbpath ~/UARK/node/socketblaster/socketblaster/data
+
 
 To add a user:
 db.userlist.insert({'username' : 'test1','email' : 'test1@test.com','fullname' : 'Bob Smith','age' : 27,'location' : 'San Francisco','gender' : 'Male'})
