@@ -1,0 +1,42 @@
+To install mongodb on foldertree:
+navigate to node_modules folder
+sudo npm install mongodb
+sudo npm install monk
+
+sudo netstat -peant | grep ":27017"
+to find out whats using a port
+
+tutorial:
+http://cwbuecheler.com/web/tutorials/2014/restful-web-app-node-express-mongodb/
+
+to stop apache server
+sudo service apache2 stop 
+
+to stop all mongo processes
+sudo killall mongod
+
+to give access: sudo chmod 777 -R ~/Documents/softwareEngineering/node
+
+to start:
+npm start   // in main socketblaster folder
+mongod --dbpath ~/UARK/node/nodetest2/data  // to start database
+
+mongod --dbpath ~/node/socketblaster/data --smallfiles
+
+
+To add a user:
+db.userlist.insert({'username' : 'test1','email' : 'test1@test.com','fullname' : 'Bob Smith','age' : 27,'location' : 'San Francisco','gender' : 'Male'})
+
+
+
+navigate to node folder
+sudo git init
+sudo git remote add origin https://github.com/chheller/socketblaster    // origin is name of repo
+sudo git pull origin master  // Updates local repository to the newest commit
+sudo git merge <branch>  merges another branch into active branch
+
+
+sudo git add socketblaster
+sudo git commit -m "message here"
+sudo push origin Sam
+
