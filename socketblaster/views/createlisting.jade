@@ -7,3 +7,9 @@ block pageTitle
 block pageContent
 	h1= title
 	p This creates a listing
+		#addListing
+			input#inputItemName(type='text', placeholder='Item Name', class="form-control")
+			input#inputItemPrice(type='text', placeholder='Item Price', class="form-control")
+			input#inputItemDesc(type='text', placeholder='Item Description', class="form-control")
+			br
+			button#btnAddListing(class="btn btn-lg btn-primary btn-block") Post Listing

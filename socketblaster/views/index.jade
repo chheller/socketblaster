@@ -11,12 +11,12 @@ block pageTitle
 	.container
 		div.row
 			#login.col-md-3
-				form(name="login", action="/login", method="post")
-					h3(class="form-signin-heading") Sign in
-					input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
-					input(type="password", id="inputpassword", class="form-control", placeholder="Password")
-					br
-					input(type="submit", value="login", class="btn btn-lg btn-primary btn-block", id="loginButton")
+				//- form(name="login", action="/", method="post")
+				h3(class="form-signin-heading") Sign in
+				input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
+				input(type="password", id="inputpassword", class="form-control", placeholder="Password")
+				br
+				input(type="submit", value="login", class="btn btn-lg btn-primary btn-block", id="loginButton")
 
 				h3(class="form-signin-heading") New? Signup today!
 				#addUser
@@ -77,3 +77,17 @@ block pageContent
 			+storeItem("http://placehold.it/320x150", "Fourth Item", "$24.99", "See More")
 			+storeItem("http://placehold.it/320x150", "Fifth Item", "$24.99", "See More")
 			+storeItem("http://placehold.it/320x150", "Sixth Item", "$24.99", "See More")
+	div.row.container
+		div.col-md-4
+		div.col-md-4
+			// LISTINGS LIST
+			h2 Listings
+			#listings
+					table
+							thead
+									th Listing Name
+									th Listing Price
+									th Description
+							tbody
+			// /LISTINGS LIST
+		div.col-md-4

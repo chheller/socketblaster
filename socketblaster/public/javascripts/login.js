@@ -1,9 +1,11 @@
+
 $(document).ready(function () {
 
     $("#loginButton").click(function () {
 
         var userEmail = $('#inputemail').val();
         var password = $('#inputpassword').val();
+        var found = false;
 
         // jQuery AJAX call for JSON
         $.getJSON( '/users/userlist', function( data ) {
@@ -14,13 +16,17 @@ $(document).ready(function () {
                   console.log("logged in: ", this.email, " ", this.password);
                   sessionStorage.setItem('user', userEmail);
                   sessionStorage.setItem('login', "true");
+                  found = true;
               }
-              else {console.log("wrong combo: " , userEmail , " " , this.email , " " , password , " " , this.password);}
+              else {
+                console.log("wrong combo: " , userEmail , " " , this.email , " " , password , " " , this.password);}
             });
-
+            if(found == false) {
+              alert("wrong credentials");
+            }
         });
 
-
+        location.reload();
     });
 
     $("#signOutButton").click(function () {

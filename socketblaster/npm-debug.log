@@ -18,7 +18,7 @@
 9 verbose stack     at maybeClose (internal/child_process.js:821:16)
 9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 10 verbose pkgid socketblaster@0.0.0
-11 verbose cwd /home/grneggandsam/node/socketblaster
+11 verbose cwd /home/grneggandsam/UARK/node/socketblaster/socketblaster
 12 error Linux 3.13.0-32-generic
 13 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
 14 error node v4.2.6
