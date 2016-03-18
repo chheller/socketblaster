@@ -17,6 +17,9 @@ $(document).ready(function() {
 
     // Delete User link click
     $('#userList table tbody').on('click', 'td a.linkdeleteuser', deleteUser);
+
+    // Delete User link click
+    $('#listings').on('click', 'a.linkdeletelisting', deleteListing);
 });
 
 // Functions =============================================================
@@ -69,7 +72,7 @@ function populateListings() {
             listingContent += '<div class="caption">';
             listingContent += '<h4 class="pull-right"> ' + this.price + ' </h4>'
             listingContent += '<h4>' + this.name + ' </h4>';
-            listingContent += '<p>' + this.description + ' </p></div></div></div></div>';
+            listingContent += '<p>' + this.description + ' </p><a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a></div></div></div></div>';
 
             //
             // i++;
@@ -190,6 +193,45 @@ function deleteUser(event) {
 
             // Update the table
             populateTable();
+
+        });
+
+    }
+    else {
+
+        // If they said no to the confirm, do nothing
+        return false;
+
+    }
+
+};
+
+// Delete User
+function deleteListing(event) {
+
+    event.preventDefault();
+
+    // Pop up a confirmation dialog
+    var confirmation = confirm('Are you sure you want to delete this listing?');
+
+    // Check and make sure the user confirmed
+    if (confirmation === true) {
+
+        // If they did, do our delete
+        $.ajax({
+            type: 'DELETE',
+            url: '/listings/deletelisting/' + $(this).attr('rel')
+        }).done(function( response ) {
+
+            // Check for a successful (blank) response
+            if (response.msg === '') {
+            }
+            else {
+                alert('Error: ' + response.msg);
+            }
+
+            // Update the table
+            populateListings();
 
         });
 

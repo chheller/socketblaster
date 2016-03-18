@@ -31,8 +31,8 @@ router.post('/addlisting', function(req, res) {
 router.delete('/deletelisting/:id', function(req, res) {
     var db = req.db;
     var collection = db.get('listings');
-    var userToDelete = req.params.id;
-    collection.remove({ '_id' : userToDelete }, function(err) {
+    var listingToDelete = req.params.id;
+    collection.remove({ '_id' : listingToDelete }, function(err) {
         res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
     });
 });
