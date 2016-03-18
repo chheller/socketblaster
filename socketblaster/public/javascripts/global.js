@@ -52,6 +52,7 @@ function populateListings() {
 
     // Empty content string
     var listingContent = '';
+    var i = 0;
 
     // jQuery AJAX call for JSON
     $.getJSON( '/listings/listings', function( data ) {
@@ -61,12 +62,26 @@ function populateListings() {
 
         // For each item in our JSON, add a table row and cells to the content string
         $.each(data, function(){
-            listingContent += '<tr>';
-            listingContent += '<td><a href="#" class="linkshowuser" rel="' + this.name + '">' + this.name + '</a></td>';
+            // var myPath = "http://placehold.it/320x150";
+
+            listingContent += '<div class="col-sm-4">'
+            listingContent +=	'<div class="thumbnail"><div class="images"></div>';
+            listingContent += '<div class="caption">';
+            listingContent += '<h4 class="pull-right"> ' + this.price + ' </h4>'
+            listingContent += '<h4>' + this.name + ' </h4>';
+            listingContent += '<p>' + this.description + ' </p></div></div></div></div>';
+
+            //
+            // i++;
         });
 
         // Inject the whole content string into our existing HTML table
-        $('#listings table tbody').html(listingContent);
+        document.getElementById("listings").innerHTML = listingContent;
+
+        // var j;
+        // for(j=0; j<i; j++)
+        //   document.getElementById("a" + i).src="http://placehold.it/320x150";
+
     });
 };
 
