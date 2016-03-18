@@ -53,6 +53,7 @@ function addListing(event) {
 
             }
         });
+        window.location.href = '/';
     }
     else {
         // If errorCount is more than 0, error out
