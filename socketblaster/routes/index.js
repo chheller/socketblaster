@@ -1,6 +1,20 @@
 var express = require('express');
 var router = express.Router();
+module.exports = function(io) {
 
+  io.on( "connection", function( socket )
+  {
+      console.log( "A user connected" );
+      socket.on('chat message', function(msg) {
+        console.log(msg);
+        socket.emit('chat message', msg);
+      });
+      socket.on("Loaded", function() {
+        console.log("Page loaded");
+      });
+  });
+  return router;
+};
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Socket Blaster' });
@@ -17,7 +31,3 @@ router.get('/JessWebGLTest', function(req, res, next) {
 router.get('/createlisting', function(req, res, next) {
   res.render('createlisting', { title: 'Create Listing' });
 });
-module.exports = function(io) {
-  io.emit("Junk, simply unk");
-  return router;
-};

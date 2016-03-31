@@ -18,11 +18,6 @@ var listings = require('./routes/listings');
 var app = express();
 app.io = require('socket.io')();
 
-app.io.on( "connection", function( socket )
-{
-    console.log( "A user connected" );
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
