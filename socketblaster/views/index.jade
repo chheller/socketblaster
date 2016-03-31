@@ -53,6 +53,9 @@ block pageTitle
 
 block pageContent
 	br
+	script(src='/socket.io/socket.io.js')
+	script.
+		var socket = io.connect('localhost');
 	div.row.container
 		div.col-md-4
 		div.col-md-4
