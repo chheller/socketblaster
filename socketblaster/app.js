@@ -1,3 +1,4 @@
+var io = require('socket.io');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -15,6 +16,12 @@ var users = require('./routes/users');
 var listings = require('./routes/listings');
 
 var app = express();
+app.io = require('socket.io')();
+
+app.io.on( "connection", function( socket )
+{
+    console.log( "A user connected" );
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +41,7 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use('/', routes);
+app.use('/', routes(app.io));
 app.use('/users', users);
 app.use('/listings', listings);
 

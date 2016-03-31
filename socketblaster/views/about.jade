@@ -1,11 +1,24 @@
 extends layout
-
+script(src='/socket.io/socket.io.js')
+script(src='http://code.jquery.com/jquery-1.11.1.js')
+script.
+	var socket = io();
+	$('form').submit(function(){
+		socket.emit('chat message', $('#message').val());
+		$('#message').val('');
+		return false;
+	});
 block pageTitle
 	div.row.jumbotron
 		div.col-md-12 About Us!
 block pageContent
 	.container
 		div.row
-			div.col-md-4.bg-success This Page needs more development
-			div.col-md-4.bg-success This is the development page for the Socketblaster Software Engineering project!
-			div.col-md-4.bg-success And pictures too
+			div.col-md-4
+			div.col-md-4
+				form(action='')
+					label(for='message') Message:
+					input(type='text', message='message', id='message')
+					input(type='submit', name='submit', value='Send').submit-button
+					
+			div.col-md-4

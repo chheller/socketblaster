@@ -17,4 +17,7 @@ router.get('/JessWebGLTest', function(req, res, next) {
 router.get('/createlisting', function(req, res, next) {
   res.render('createlisting', { title: 'Create Listing' });
 });
-module.exports = router;
+module.exports = function(io) {
+  io.emit("Junk, simply unk");
+  return router;
+};
