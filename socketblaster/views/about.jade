@@ -1,29 +1,17 @@
 extends layout
-script(src='/socket.io/socket.io.js')
-script(src='http://code.jquery.com/jquery-1.11.1.js')
-script.
-	var socket = io.connect('socketblaster.com');
-	socket.on
-	$('form').submit(function(){
-		socket.emit('chat message', $('#message').val());
-		$('#message').val('');
-		return false;
-	});
-	socket.on('chat message', function(msg){
-		$('#messages').append($('<li>').text(msg));
-	});
 block pageTitle
 	div.row.jumbotron
-		div.col-md-12 About Us!
+		div.col-md-12 About Us! Now testing Sockets!
 block pageContent
 	br
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-1.11.1.js')
 	script.
-		var socket = io.connect('localhost');
+		var socket = io.connect('socketblaster.com');
 		socket.on("connect", function() {
 			$('form').submit(function(){
 				socket.emit('chat message', $('#message').val());
+				$('#messages-area').append($('<li>').text($('#message').val()));
 				$('#message').val('');
 				return false;
 			});

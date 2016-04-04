@@ -7,7 +7,7 @@ module.exports = function(io) {
       console.log( "A user connected" );
       socket.on('chat message', function(msg) {
         console.log(msg);
-        socket.emit('chat message', msg);
+        socket.broadcast.emit('chat message', msg);
       });
       socket.on("Loaded", function() {
         console.log("Page loaded");
