@@ -1,8 +1,8 @@
 
 $(document).ready(function () {
-
+    
     $("#loginButton").click(function () {
-
+        
         var userEmail = $('#inputemail').val();
         var password = $('#inputpassword').val();
         var found = false;
@@ -25,8 +25,9 @@ $(document).ready(function () {
               alert("wrong credentials");
             }
         });
+        
+        setTimeout(function(){ location.reload(); }, 1000);
 
-        location.reload();
     });
 
     $("#signOutButton").click(function () {
