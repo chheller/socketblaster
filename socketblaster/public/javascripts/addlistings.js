@@ -26,6 +26,7 @@ function addListing(event) {
             'name': $('#addListing input#inputItemName').val(),
             'price': $('#addListing input#inputItemPrice').val(),
             'description': $('#addListing input#inputItemDesc').val(),
+            'user' : sessionStorage.getItem('user')
         }
 
         // Use AJAX to post the object to our adduser service

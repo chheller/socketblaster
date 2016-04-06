@@ -20,6 +20,7 @@ $(document).ready(function() {
 
     // Delete User link click
     $('#listings').on('click', 'a.linkdeletelisting', deleteListing);
+
 });
 
 // Functions =============================================================
@@ -124,41 +125,54 @@ function addUser(event) {
     // Check and make sure errorCount's still at zero
     if(errorCount === 0) {
 
-        // If it is, compile all user info into one object
-        var newUser = {
-            'username': $('#addUser input#inputUserName').val(),
-            'email': $('#addUser input#inputUserEmail').val(),
-            'password': $('#addUser input#inputPassword').val(),
-            'fullname': $('#addUser input#inputUserFullname').val()
-            // 'age': $('#addUser fieldset input#inputUserAge').val(),
-            // 'location': $('#addUser fieldset input#inputUserLocation').val()
+      if($('#addUser input#inputPassword').val() == $('#addUser input#inputpasswordconf').val()) {
+
+        if($('#addUser input#inputUserEmail').val().search("@") != -1) {
+            console.log($('#addUser input#inputUserEmail').val().search("@"));
+            // If it is, compile all user info into one object
+            var newUser = {
+                'username': $('#addUser input#inputUserName').val(),
+                'email': $('#addUser input#inputUserEmail').val(),
+                'password': $('#addUser input#inputPassword').val(),
+                'fullname': $('#addUser input#inputUserFullname').val()
+                // 'age': $('#addUser fieldset input#inputUserAge').val(),
+                // 'location': $('#addUser fieldset input#inputUserLocation').val()
+            }
+
+            // Use AJAX to post the object to our adduser service
+            $.ajax({
+                type: 'POST',
+                data: newUser,
+                url: '/users/adduser',
+                dataType: 'JSON'
+            }).done(function( response ) {
+
+                // Check for successful (blank) response
+                if (response.msg === '') {
+
+                    // Clear the form inputs
+                    $('#addUser fieldset input').val('');
+
+                    // Update page
+                    alert("user created");
+                    location.reload();
+
+                }
+                else {
+
+                    // If something goes wrong, alert the error message that our service returned
+                    alert('Error: ' + response.msg);
+
+                }
+            });
+          }
+          else {
+            alert("please use a correct email address");
+          }
         }
-
-        // Use AJAX to post the object to our adduser service
-        $.ajax({
-            type: 'POST',
-            data: newUser,
-            url: '/users/adduser',
-            dataType: 'JSON'
-        }).done(function( response ) {
-
-            // Check for successful (blank) response
-            if (response.msg === '') {
-
-                // Clear the form inputs
-                $('#addUser fieldset input').val('');
-
-                // Update the table
-                populateTable();
-
-            }
-            else {
-
-                // If something goes wrong, alert the error message that our service returned
-                alert('Error: ' + response.msg);
-
-            }
-        });
+        else{
+          alert("Please match passwords");
+        }
     }
     else {
         // If errorCount is more than 0, error out

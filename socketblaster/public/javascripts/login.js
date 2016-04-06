@@ -1,36 +1,36 @@
 
+
 $(document).ready(function () {
-    
+
     $("#loginButton").click(function () {
-        
+
         var userEmail = $('#inputemail').val();
         var password = $('#inputpassword').val();
         var found = false;
 
-        // jQuery AJAX call for JSON
-        $.getJSON( '/users/userlist', function( data ) {
+        // This hopefully logs us in
+        $.ajax({
+            type: 'POST',
+            url: '/users/login/' + userEmail + '/' + password
+        }).done(function( response ) {
 
-            // For each item in our JSON, check if username and password match
-            $.each(data, function(){
-              if(userEmail == this.email && password == this.password) {
-                  console.log("logged in: ", this.email, " ", this.password);
-                  sessionStorage.setItem('user', userEmail);
-                  sessionStorage.setItem('login', "true");
-                  found = true;
-              }
-              else {
-                console.log("wrong combo: " , userEmail , " " , this.email , " " , password , " " , this.password);}
-            });
-            if(found == false) {
-              alert("wrong credentials");
+            // Check for a successful (true) response
+            if (response.msg == 'true') {
+              sessionStorage.setItem('user', userEmail);  //Set session storage data for user
+              sessionStorage.setItem('login', "true");    //Set session storage data for logged in
+              location.reload();
             }
+            else {
+              alert('Error: ' + response.msg);
+            }
+
         });
-        
+
         setTimeout(function(){ location.reload(); }, 1000);
 
     });
 
-    $("#signOutButton").click(function () {
+    $("#signOut").click(function () {
         sessionStorage.setItem('user', "");
         sessionStorage.setItem('login', "false");
         location.reload();
@@ -43,7 +43,9 @@ $(document).ready(function () {
         document.getElementById("userName").innerHTML = userCheck;
         $("#login").hide();
         $("#signOut").show();
+        $("#postL").show();
     } else {
         $("#signOut").hide();
+        $("#postL").hide();
     }
 });
