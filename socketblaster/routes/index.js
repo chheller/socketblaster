@@ -31,3 +31,6 @@ router.get('/JessWebGLTest', function(req, res, next) {
 router.get('/createlisting', function(req, res, next) {
   res.render('createlisting', { title: 'Create Listing' });
 });
+router.get('/Dashboard', function(req, res, next) {
+  res.render('Dashboard', { title: 'Dashboard' });
+});

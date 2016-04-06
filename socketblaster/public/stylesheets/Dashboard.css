@@ -1,0 +1,47 @@
+a.list-group-item, .panel-heading{
+        color: black;
+        background-color: #f1e6da ;
+}
+
+.panel-heading{
+
+}
+
+b.list-group-item{
+
+}
+
+body{
+  background-color: lightgrey;
+}
+
+#MiddleContent{
+  padding-top: 50px;
+}
+.rightnav, .leftnav{
+     padding-top: 50px;
+     padding-bottom: 40px;
+     background-color: #f1f1f1;
+     height: 100%;
+   }
+
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.wrapper {
+ height: 650px
+}
+
+.footer {
+  width: 100%;
+  background-color: black;
+}
+
+.initiallyHidden {
+  display: none;
+}
