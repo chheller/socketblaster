@@ -73,7 +73,16 @@ function populateListings() {
             listingContent += '<div class="caption">';
             listingContent += '<h4 class="pull-right"> ' + this.price + ' </h4>'
             listingContent += '<h4>' + this.name + ' </h4>';
-            listingContent += '<p>' + this.description + ' </p><a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a></div></div></div></div>';
+            listingContent += '<p>' + this.description + ' </p>';
+            listingContent += '<a href="#" class="linkdeletelisting">' + this.user + '</a></br>';
+            // listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
+
+              if(sessionStorage.getItem('user') == this.user) {
+                console.log("user listing detected");
+                listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
+              }
+
+            listingContent += '</div></div></div></div>';
 
             //
             // i++;
