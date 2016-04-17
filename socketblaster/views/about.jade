@@ -6,28 +6,55 @@ block pageContent
 	br
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-1.11.1.js')
-	script.
-		var socket = io.connect('socketblaster.com');
-		socket.on("connect", function() {
-			$('form').submit(function(){
-				socket.emit('chat message', $('#message').val());
-				$('#messages-area').append($('<li>').text($('#message').val()));
-				$('#message').val('');
-				return false;
-			});
-			socket.on('chat message', function(msg) {
-				$('#messages-area').append($('<li>').text(msg));
-			});
-		});
 		
 	.container
 		div.row
 			div.col-md-4
 			div.col-md-4
 				ul(id="messages-area")
-				form(action='')
-					label(for='message') Message:
-					input(type='text', message='message', id='message')
-					button.btn().submit Send
-					
+
+				form(action='' class="chat-form")
+					label(for='recipientName') Send To User: 
+					input(type='text', id='recipient')
+					br
+					br
+					label(for='message') Message: 
+					textarea(id='message')
+					br
+					<input type="submit" value="Send" class="pull-right"/>
+					br
+					br
+				ul(id="messages")
 			div.col-md-4
+			
+	script.
+		var socket = io.connect('http://localhost');
+		socket.on("connect", function() {
+			
+			console.log("here");
+			var userEmail = sessionStorage.getItem('user', userEmail);
+			socket.emit("add-user", {"username": userEmail});
+			
+			var chat_form = $(".chat-form");
+			chat_form.show();
+			chat_form.on("submit", function(){
+			// Send the message to the server
+			socket.emit("private-message", {
+				"username": $(this).find("input:first").val(),
+				"content": "Received from " + userEmail + ": " + $(this).find("textarea").val()
+			});
+			
+			$('#messages').append($('<li>').text("Sent to " + $("#recipient").val() + ": " + $('#message').val()));
+			
+			// Empty the form
+			$(this).find("textarea").val('');
+
+			return false;
+			});
+			// Whenever we receieve a message, append it to the <ul>
+			socket.on("add-message", function(data){
+			$("#messages").append($("<li>", {
+				"text": data.content
+			}));
+			});
+		});

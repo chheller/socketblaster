@@ -1,10 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var clients = {};
 module.exports = function(io) {
 
   io.on( "connection", function( socket )
   {
       console.log( "A user connected" );
+      socket.on('add-user', function(data){
+        console.log(data.username + " added");
+        clients[data.username] = {
+         "socket": socket.id
+        };
+      });
+      
       socket.on('chat message', function(msg) {
         console.log(msg);
         socket.broadcast.emit('chat message', msg);
@@ -12,6 +20,28 @@ module.exports = function(io) {
       socket.on("Loaded", function() {
         console.log("Page loaded");
       });
+      
+      socket.on('private-message', function(data){
+        console.log("Sending: " + data.content + " to " + data.username);
+        if (clients[data.username]){
+          io.sockets.connected[clients[data.username].socket].emit("add-message", data);
+        } else {
+          console.log("User does not exist: " + data.username); 
+        }
+      });
+      
+      //Removing the socket on disconnect
+      socket.on('disconnect', function() {
+        console.log("disconnect hit");
+        for(var name in clients) {
+          if(clients[name].socket === socket.id) {
+            delete clients[name];
+            break;
+          }
+        }	
+      })
+
+      
   });
   return router;
 };
