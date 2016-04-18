@@ -37,7 +37,7 @@ block pageContent
 		var userEmail = sessionStorage.getItem('user', userEmail);
 		if(userEmail != null && userEmail != "")
 		{
-			var socket = io.connect('http://localhost');
+			var socket = io.connect('socketblaster.com');
 			socket.on("connect", function() {
 				
 				socket.emit("add-user", {"username": userEmail});
