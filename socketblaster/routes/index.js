@@ -6,11 +6,25 @@ module.exports = function(io) {
   io.on( "connection", function( socket )
   {
       console.log( "A user connected" );
+      
       socket.on('add-user', function(data){
         console.log(data.username + " added");
         clients[data.username] = {
          "socket": socket.id
         };
+        
+        for(var name in clients) {
+          io.sockets.connected[clients[name].socket].emit("user-connected", data);
+        }
+        
+        var users = "";
+        
+        for(var name in clients) {
+          users = users + name + "-";
+        }
+        
+        io.sockets.connected[clients[data.username].socket].emit("currentUser-list", users);
+        
       });
       
       socket.on('chat message', function(msg) {
@@ -25,20 +39,29 @@ module.exports = function(io) {
         console.log("Sending: " + data.content + " to " + data.username);
         if (clients[data.username]){
           io.sockets.connected[clients[data.username].socket].emit("add-message", data);
+          io.sockets.connected[clients[data.sender].socket].emit("send-confirmation", "Sent to " + data.username + ": " + data.msg);
+          
         } else {
           console.log("User does not exist: " + data.username); 
+          io.sockets.connected[clients[data.sender].socket].emit("add-message", "user does not exist");
         }
       });
       
       //Removing the socket on disconnect
       socket.on('disconnect', function() {
-        console.log("disconnect hit");
         for(var name in clients) {
           if(clients[name].socket === socket.id) {
             delete clients[name];
             break;
           }
         }	
+        var users = "";
+        for(var temp in clients) {
+          users = users + temp + "-";
+        }
+        for(var temp in clients) {
+          io.sockets.connected[clients[temp].socket].emit("currentUser-list", users);
+        }
       })
 
       
