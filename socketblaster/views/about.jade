@@ -6,28 +6,112 @@ block pageContent
 	br
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-1.11.1.js')
-	script.
-		var socket = io.connect('socketblaster.com');
-		socket.on("connect", function() {
-			$('form').submit(function(){
-				socket.emit('chat message', $('#message').val());
-				$('#messages-area').append($('<li>').text($('#message').val()));
-				$('#message').val('');
-				return false;
-			});
-			socket.on('chat message', function(msg) {
-				$('#messages-area').append($('<li>').text(msg));
-			});
-		});
 		
 	.container
 		div.row
 			div.col-md-4
 			div.col-md-4
+				ul(id="notLoggedIn")
+			
 				ul(id="messages-area")
-				form(action='')
-					label(for='message') Message:
-					input(type='text', message='message', id='message')
-					button.btn().submit Send
-					
+
+				form(action='' class="chat-form")
+					label(for='recipientName') Send To User: 
+					input(type='text', id='recipient')
+					br
+					br
+					label(for='message') Message: 
+					textarea(id='message')
+					br
+					<input type="submit" value="Send" class="pull-right"/>
+					br
+					br
+				label(for='messages') Messages:
+				ul(id="messages")
+				label(for='users') Users Online:
+				ul(id="users")
 			div.col-md-4
+			
+	script.
+		
+		var userEmail = sessionStorage.getItem('user', userEmail);
+		if(userEmail != null && userEmail != "")
+		{
+			var socket = io.connect('socketblaster.com');
+			socket.on("connect", function() {
+				
+				socket.emit("add-user", {"username": userEmail});
+				
+				var chat_form = $(".chat-form");
+				chat_form.show();
+				chat_form.on("submit", function(){
+					// Send the message to the server
+					socket.emit("private-message", {
+						"username": $(this).find("input:first").val(),
+						"sender": userEmail,
+						"msg": $(this).find("textarea").val(),
+						"content": "Received from " + userEmail + ": " + $(this).find("textarea").val()
+					});
+					
+					//$('#messages').append($('<li>').text("Sent to " + $("#recipient").val() + ": " + $('#message').val()));
+					
+					// Empty the form
+					$(this).find("textarea").val('');
+
+					return false;
+				});
+				
+				// Whenever we receieve a message, append it to the <ul>
+				socket.on("add-message", function(data){
+					if(data == "user does not exist")
+					{
+						$("#messages").append($("<li>", {
+							"text": data
+						}));
+					}
+					else
+					{
+						$("#messages").append($("<li>", {
+							"text": data.content
+						}));
+					}
+				});
+				
+				socket.on("send-confirmation", function(data){
+				
+					$('#messages').append($('<li>').text(data));
+						
+				});
+				
+				socket.on("user-connected", function(data){
+					
+					$("#users").append($("<li>", {
+						"text": data.username
+					}));
+		
+				});
+				
+				socket.on("currentUser-list", function(data){
+					$("#users").text("");
+					var str = JSON.stringify(data);
+					
+					str = str.slice(1, -1);
+					var allUsers = str.split("-");
+					
+					for(var x = 0; x < allUsers.length - 1; x++)
+					{
+						$("#users").append($("<li>", {
+							"text": allUsers[x]
+						}));
+					}
+				});
+			});
+		}
+		else
+		{
+			$("#users").hide();
+			$("#messages-area").hide();
+			$("#messages").hide();
+			$(".chat-form").hide();
+			$("#notLoggedIn").text("you must be logged in to access chat");
+		}

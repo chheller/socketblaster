@@ -35,6 +35,12 @@ $(document).ready(function () {
         sessionStorage.setItem('login', "false");
         location.reload();
     });
+    
+    $("#btnAddUser").click(function () {
+        var userEmail = $('#inputUserEmail').val();
+        sessionStorage.setItem('user', userEmail);  //Set session storage data for user
+        sessionStorage.setItem('login', "true");    //Set session storage data for logged in
+    });
 
     var userCheck = sessionStorage.getItem('user');
     var loginCheck = sessionStorage.getItem('login');
