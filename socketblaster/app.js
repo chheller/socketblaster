@@ -14,6 +14,7 @@ var db = monk('localhost:27017/nodetest2');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var listings = require('./routes/listings');
+var conversations = require('./routes/conversations');
 
 var app = express();
 app.io = require('socket.io')();
@@ -41,6 +42,7 @@ app.use(function (req, res, next) {
 app.use('/', routes(app.io));
 app.use('/users', users);
 app.use('/listings', listings);
+app.use('/conversations', conversations);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

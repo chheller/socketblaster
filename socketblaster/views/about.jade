@@ -55,6 +55,24 @@ block pageContent
 					
 					//$('#messages').append($('<li>').text("Sent to " + $("#recipient").val() + ": " + $('#message').val()));
 					
+					// Send the message to the DB
+					// compile all message data into JSON
+					var newMessage = {
+						"username": $(this).find("input:first").val(),
+						"sender": userEmail,
+						"msg": $('#message').val()
+					};
+					
+					console.log(newMessage);
+					
+					// Use AJAX to post the object to our conversations service
+					$.ajax({
+							type: 'POST',
+							data: newMessage,
+							url: '/conversations/new',
+							dataType: 'JSON'
+					}).done(function( response ) {});
+
 					// Empty the form
 					$(this).find("textarea").val('');
 
