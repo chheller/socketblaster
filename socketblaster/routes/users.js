@@ -4,6 +4,7 @@ var router = express.Router();
 /*
  * GET userlist.
  */
+ /**
 router.get('/userlist', function(req, res) {
     var db = req.db;
     var collection = db.get('userlist');
@@ -11,7 +12,7 @@ router.get('/userlist', function(req, res) {
         res.json(docs);
     });
 });
-
+**/
 router.post('/login/:email/:password', function(req, res) {
   var db = req.db;
   var collection = db.get('userlist');

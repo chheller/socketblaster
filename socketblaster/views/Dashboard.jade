@@ -7,52 +7,40 @@ block pageContent
   //LEFTSIDE ACCORDIAN MENU
   .container-fluid.text-center.nopadding
     .wrapper
-        .row.col-md-2.leftnav.sidenav
+        div.row.col-md-2.leftnav.sidenav
           #Menu
             .list-group.panel
 
               // ACCORDIAN FOR ACCOUNT SETTINGS
-              a.list-group-item.list-group-item-success(href='#AccountSettings', data-toggle= "collapse")
-                | Account Settings
+              a.list-group-item.list-group-item-success(href='#AccountSettings', data-toggle= "collapse") Account Settings
                 i.fa.fa-caret-down
               #AccountSettings.collapse.in
-                panel.button.list-group-item(href='#ChangeInfo', data-toggle= "collapse")
-                  | Change Account Information
-                panel.button.list-group-item(href='#PasswordRecovery', data-toggle= "collapse")
-                  | Password Recovery
-                panel.button.list-group-item(href='#ManageMembership', data-toggle= "collapse")
-                  | Manage Membership
-                panel.button.list-group-item(href='#ManagePayments', data-toggle= "collapse")
-                  | Manage Payment Options
+                panel.button.list-group-item(href='#ChangeInfo', data-toggle= "collapse") Change Account Information
+                panel.button.list-group-item(href='#PasswordRecovery', data-toggle= "collapse")  Password Recovery
+                panel.button.list-group-item(href='#ManageMembership', data-toggle= "collapse") Manage Membership
+                panel.button.list-group-item(href='#ManagePayments', data-toggle= "collapse")  Manage Payment Options
 
               // ACCORDIAN FOR LISTINGS
               a.list-group-item.list-group-item-success(href='#Listings', data-toggle= "collapse")
                 | Listings
                 i.fa.fa-caret-down
               #Listings.collapse.in
-                panel.button.list-group-item(href='#ViewBuy', data-toggle= "collapse")
-                  | View Buy Orders
-                panel.button.list-group-item(href='#ViewSale', data-toggle= "collapse")
-                  | View Your Sales
-                panel.button.list-group-item(href='#ShoppingList', data-toggle= "collapse")
-                  | View Shopping List
-                panel.button.list-group-item(href='#TransactionHistory', data-toggle= "collapse")
-                  | View Transaction History
+                panel.button.list-group-item(href='#ViewBuy', data-toggle= "collapse") View Buy Orders
+                panel.button.list-group-item(href='#ViewSale', data-toggle= "collapse") View Your Sales
+                panel.button.list-group-item(href='#ShoppingList', data-toggle= "collapse") View Shopping List
+                panel.button.list-group-item(href='#TransactionHistory', data-toggle= "collapse") View Transaction History
 
               // ACCORDIAN FOR OPTIONS
-              a.list-group-item.list-group-item-success(href='#Messages', data-toggle= "collapse")
-                | Messages
+              a.list-group-item.list-group-item-success(href='#Messages', data-toggle= "collapse")  Messages
                 i.fa.fa-caret-down
               #Messages.collapse.in
-                panel.button.list-group-item(href='#ActiveConv', data-toggle= "collapse")
-                  | Active Conversations
-                panel.button.list-group-item(href='#MessageHistory', data-toggle= "collapse")
-                  | Message History
+                panel.button.list-group-item(href='#ActiveConv', data-toggle= "collapse") Active Conversations
+                panel.button.list-group-item(href='#MessageHistory', data-toggle= "collapse") Message History
                 
-        .row.col-md-8
+        div.row.col-md-2
+        div.row.col-md-4
           #MiddleContent
-            p
-            |  THIS IS ALWAYS HERE
+            //p  THIS IS ALWAYS HERE
             
             #ChangeInfo.initiallyHidden
               h3 To change your information fill out the Fields below
@@ -65,67 +53,50 @@ block pageContent
               button#btnAddUser(class="btn btn-lg btn-primary btn-block") Change Account Info
               
             #PasswordRecovery.initiallyHidden
-              p
-              | Here is the content for changing your password
+              br
+              p Here is the content for changing your password
               
             #ManageMembership.initiallyHidden
-              p
-              | Manage Membership
+              p Manage Membership
             
             #ManagePayments.initiallyHidden
-              p
-              | Manage Payments
+              p Manage Payments
               
             #ViewBuy.initiallyHidden
-              p
-              | View Buy Orders
+              p View Buy Orders
             
             #ViewSale.initiallyHidden
-              p
-              | View Sales
+              p View Sales
               
             #ShoppingList.initiallyHidden
-              p
-              | View Shopping List
+              p View Shopping List
             
             #TransactionHistory.initiallyHidden
-              p
-              | Transaction HIstory here
+              p Transaction HIstory here
               
             #ActiveConv.initiallyHidden
-              p
-              | List of active Conversations
+              p List of active Conversations
             
             #MessageHistory.initiallyHidden
-              p
-              | Message history
+              p  Message history
             
-        .row.col-md-2.rightnav.sidenav
+        div.row.col-md-2
+        div.row.col-md-2.rightnav.sidenav
           #acctinfo
             .list-group.panel
-              .panel-heading
-                | Account Info
-              .panel-body
-                | Username: "user username"
-              .panel-body
-                | Email: "user email"
-              .panel-body
-                | User since: "reg date"
+              .panel-heading  Account Info
+              .panel-body  Username: "user username"
+              .panel-body  Email: "user email"
+              .panel-body  User since: "reg date"
           #listinginfo
             .list-group.panel
-              .panel-heading
-                | Listing Info
-              .panel-body
-                | Sell Listings Posted: "number"
-              .panel-body
-                | Buy Listings  Posted: "number"
+              .panel-heading  Listing Info
+              .panel-body Sell Listings Posted: "number"
+              .panel-body  Buy Listings  Posted: "number"
           #messginfo
             .list-group
-              .panel-heading
-                | Recent Messages
-              .panel-body.btn-md.btn-default
-                | Message 1
-              .panel-body.btn-md.btn-default
-                | Message 2
+              .panel-heading  Recent Messages
+              .panel-body.btn-md.btn-default  Message 1
+              .panel-body.btn-md.btn-default  Message 2
 
                       
