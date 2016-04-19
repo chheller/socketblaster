@@ -1,9 +1,6 @@
-$(document).ready(function () {
-
   // Add Listing button click
-  $('#btnAddListing').on('click', addListing);
+$('#btnAddListing').on('click', addListing);
 
-});
 
 
 // Add User
@@ -26,35 +23,42 @@ function addListing(event) {
             'name': $('#addListing input#inputItemName').val(),
             'price': $('#addListing input#inputItemPrice').val(),
             'description': $('#addListing input#inputItemDesc').val(),
+            'location': $('#addListing input#inputItemLoc').val(),
             'user' : sessionStorage.getItem('user')
         }
 
-        // Use AJAX to post the object to our adduser service
-        $.ajax({
-            type: 'POST',
-            data: newListing,
-            url: '/listings/addListing',
-            dataType: 'JSON'
-        }).done(function( response ) {
+        if(!isNaN(newListing.price)) {
 
-            // Check for successful (blank) response
-            if (response.msg === '') {
+          // Use AJAX to post the object to our adduser service
+          $.ajax({
+              type: 'POST',
+              data: newListing,
+              url: '/listings/addListing',
+              dataType: 'JSON'
+          }).done(function( response ) {
 
-                // Clear the form inputs
-                $('#addListing fieldset input').val('');
+              // Check for successful (blank) response
+              if (response.msg === '') {
 
-                // Update the table
-                // populateTable();
+                  // Clear the form inputs
+                  $('#addListing fieldset input').val('');
 
-            }
-            else {
+                  // Update the table
+                  // populateTable();
 
-                // If something goes wrong, alert the error message that our service returned
-                alert('Error: ' + response.msg);
+              }
+              else {
 
-            }
-        });
-        window.location.href = '/';
+                  // If something goes wrong, alert the error message that our service returned
+                  alert('Error: ' + response.msg);
+
+              }
+          });
+          window.location.href = '/';
+        }
+        else {
+          alert("Please enter a valid number as the price.");
+        }
     }
     else {
         // If errorCount is more than 0, error out
