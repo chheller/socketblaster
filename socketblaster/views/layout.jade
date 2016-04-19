@@ -11,7 +11,7 @@ html
   link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap-theme.min.css')
   link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css') 
   link(rel='stylesheet', href='stylesheets/shop-homepage.css')
-  link(rel='stylesheet', href='stylesheets/Dashboard.css')
+  // link(rel='stylesheet', href='stylesheets/Dashboard.css')
   block navBar
    nav(class='navbar navbar-default', role='navigation')
     .container-fluid
@@ -29,12 +29,13 @@ html
        li
         a#postL(href='/createlisting') Post Listing
        li
+        a#dashBd(href='/Dashboard') Dashboard
+       li
         a#userName(href="/")
        li
         a#signOut(href="#") Sign Out 
 
    script(src='/javascripts/login.js')
-   script(src='/javascripts/addlistings.js')
   block pageTitle
    h1 The title goes here
   block pageContent
