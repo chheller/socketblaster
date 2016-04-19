@@ -12,6 +12,20 @@ router.get('/listings', function(req, res) {
     });
 });
 
+router.get('/findlistings/:loc', function(req, res) {
+  var db = req.db;
+  var collection = db.get('listings');
+  var location = req.params.loc;
+  collection.find({ 'location' : location }, { 'location' : { $exists : true }}, function(e,docs){
+    if(e === null) {
+      if(docs[0] != null) {
+        res.json(docs);
+      }
+      else {res.send( { msg: "No Listings."} )}
+    }
+  });
+});
+
 /*
  * POST to addlisting.
  */
