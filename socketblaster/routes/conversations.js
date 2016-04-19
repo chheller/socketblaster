@@ -12,17 +12,15 @@ router.get('/seeAll', function(req, res) {
     });
 });
 
-router.get('/findmsgs/:sender/:recvr', function(req, res) {
+router.get('/findmsgs/:user', function(req, res) {
   var db = req.db;
   var collection = db.get('conversations');
-  var sender = req.params.sender;
-  var recvr = req.params.recvr;
-  collection.find({ 'username' : recvr, 'sender' : sender }, { 'sender' : { $exists : true }}, function(e,docs){
+  var user = req.params.user;
+  console.log("searching for convos from: " + user);
+  collection.find({ $or: [ {'username' : user}, {'sender' : user} ] }, {}, function(e,docs){
     if(e === null) {
-      if(docs[0] != null) {
-        res.json(docs);
-      }
-      else {res.send( { msg: "No Messages."} )}
+      console.log(docs);
+      res.json(docs);
     }
   });
 });

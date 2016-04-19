@@ -10,7 +10,7 @@ block pageContent
 	.container
 		div.row
 			div.col-md-4
-			div.col-md-4
+			div.col-md-4				
 				ul(id="notLoggedIn")
 			
 				ul(id="messages-area")
@@ -30,6 +30,8 @@ block pageContent
 				ul(id="messages")
 				label(for='users') Users Online:
 				ul(id="users")
+				label(id = 'pastConvos') Past Conversations:
+				#convos
 			div.col-md-4
 			
 	script.
@@ -37,6 +39,18 @@ block pageContent
 		var userEmail = sessionStorage.getItem('user', userEmail);
 		if(userEmail != null && userEmail != "")
 		{
+			var convoContent = "";
+		
+			// Use AJAX to get the conversations from the database
+			$.getJSON( '/conversations/findmsgs/' + userEmail, function( data ) {
+				$.each(data, function(){
+					convoContent += '<p>' + this.sender + " to " + this.username + ": "+ this.msg;
+					convoContent += '<p>Messages sent: ' + this.msg.length;
+				});
+				console.log(convoContent);
+				document.getElementById("convos").innerHTML = convoContent;
+			});
+		
 			var socket = io.connect('socketblaster.com');
 			socket.on("connect", function() {
 				
@@ -63,9 +77,8 @@ block pageContent
 						"msg": $('#message').val()
 					};
 					
-					console.log(newMessage);
 					
-					// Use AJAX to post the object to our conversations service
+					// Use AJAX to post the object to our conversations collection in the database
 					$.ajax({
 							type: 'POST',
 							data: newMessage,
