@@ -35,7 +35,7 @@ $(document).ready(function () {
         sessionStorage.setItem('login', "false");
         location.reload();
     });
-    
+
     $("#btnAddUser").click(function () {
         var userEmail = $('#inputUserEmail').val();
         sessionStorage.setItem('user', userEmail);  //Set session storage data for user
@@ -48,10 +48,14 @@ $(document).ready(function () {
     if (loginCheck == "true") {
         document.getElementById("userName").innerHTML = userCheck;
         $("#login").hide();
+        $("#browse").show();
+        $("#cha").show();
         $("#signOut").show();
         $("#postL").show();
     } else {
         $("#signOut").hide();
         $("#postL").hide();
+        $("#browse").hide();
+        $("#cha").hide();
     }
 });

@@ -74,6 +74,7 @@ function populateListings() {
             listingContent += '<h4 class="pull-right"> $' + this.price + ' </h4>'
             listingContent += '<h4>' + this.name + ' </h4>';
             listingContent += '<p>' + this.description + ' </p>';
+            listingContent += '<p>' + this.location + ' </p>';
             listingContent += '<a href="#" class="linkdeletelisting">' + this.user + '</a></br>';
             // listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
 
