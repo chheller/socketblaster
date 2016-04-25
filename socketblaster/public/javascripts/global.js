@@ -75,8 +75,7 @@ function populateListings() {
             listingContent += '<h4>' + this.name + ' </h4>';
             listingContent += '<p>' + this.description + ' </p>';
             listingContent += '<p>' + this.location + ' </p>';
-            listingContent += '<a href="#" class="linkdeletelisting">' + this.user + '</a></br>';
-            // listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
+            listingContent += '<a href="#" class="linkdeletelisting">' + this.user + '</a>';
 
               if(sessionStorage.getItem('user') == this.user) {
                 listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';

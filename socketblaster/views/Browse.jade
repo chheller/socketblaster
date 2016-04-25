@@ -13,9 +13,62 @@ block pageContent
 	.container
 		div.row
 			div.col-md-4
-				input(type="text", id="filterLocation", class="form-control", placeholder="Filter by Location")
+				label(for="sel1") Item Location
+				select.form-control#sel1
+					option All
+					option Alabama 
+					option Alaska 
+					option Arizona 
+					option Arkansas 
+					option California 
+					option Colorado 
+					option Connecticut 
+					option Delaware 
+					option Florida 
+					option Georgia 
+					option Hawaii 
+					option Idaho 
+					option Illinois 
+					option Indiana 
+					option Iowa 
+					option Kansas 
+					option Kentucky 
+					option Louisiana 
+					option Maine 
+					option Maryland 
+					option Massachusetts 
+					option Michigan 
+					option Minnesota 
+					option Mississippi 
+					option Missouri 
+					option Montana 
+					option Nebraska 
+					option Nevada 
+					option New Hampshire 
+					option New Jersey 
+					option New Mexico 
+					option New York 
+					option North Carolina 
+					option North Dakota 
+					option Ohio 
+					option Oklahoma 
+					option Oregon 
+					option Pennsylvania 
+					option Rhode Island 
+					option South Carolina 
+					option South Dakota 
+					option Tennessee 
+					option Texas 
+					option Utah 
+					option Vermont 
+					option Virginia 
+					option Washington 
+					option West Virginia 
+					option Wisconsin 
+					option Wyoming
 				br
 				input(type="submit", value="Submit", class="btn btn-lg btn-primary btn-block", id="submitLocation")
+		br
 		h2 Listings
 		#listings
 		// /LISTINGS LIST

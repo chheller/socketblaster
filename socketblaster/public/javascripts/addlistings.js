@@ -23,7 +23,7 @@ function addListing(event) {
             'name': $('#addListing input#inputItemName').val(),
             'price': $('#addListing input#inputItemPrice').val(),
             'description': $('#addListing input#inputItemDesc').val(),
-            'location': $('#addListing input#inputItemLoc').val(),
+            'location': $('#addListing select#sel1').val(),
             'user' : sessionStorage.getItem('user')
         }
 

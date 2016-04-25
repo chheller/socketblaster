@@ -10,14 +10,14 @@ function filterListing(event) {
 
   // Super basic validation - increase errorCount variable if any fields are blank
   var errorCount = 0;
-  $('#submitLocation input').each(function(index, val) {
+  $('#sel1').each(function(index, val) {
       if($(this).val() === '') { errorCount++; }
   });
 
   // Check and make sure errorCount's still at zero
   if(errorCount === 0) {
 
-      var location = $('#filterLocation').val();
+      var location = $('#sel1').val();
       var extension =  '/listings/findlistings/' + location;
 
       // Empty content string
@@ -41,12 +41,12 @@ function filterListing(event) {
               listingContent += '<h4>' + this.name + ' </h4>';
               listingContent += '<p>' + this.description + ' </p>';
               listingContent += '<p>' + this.location + ' </p>';
-              listingContent += '<a href="#" class="linkmessageuser">' + this.user + '</a></br>';
-              // listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
+              listingContent += '<a href="#" class="linkmessageuser">' + this.user + '</a>';
 
-                if(sessionStorage.getItem('user') == this.user) {
-                  listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
-                }
+              if(sessionStorage.getItem('user') == this.user) {
+                console.log("listing found");
+                listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
+              }
 
               listingContent += '</div></div></div></div>';
 
