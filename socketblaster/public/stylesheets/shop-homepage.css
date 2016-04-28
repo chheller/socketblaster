@@ -4,8 +4,6 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-
-
 .slide-image {
     width: 100%;
 }
@@ -54,7 +52,7 @@ footer {
 
 /* from here down added for dbtest */
 body {
-  padding: 30px;
+  /*padding: 30px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -142,4 +140,41 @@ fieldset {
   width: 100%;
   height: 150px;
   background-color: grey;
+}
+
+#backGround {
+  max-width: 100%;
+  height: 1000px;
+  background-image:url(/images/spacerocket.png);
+  background-position:center;
+  filter: brightness(50%);
+}
+
+#filter {
+  opacity: .5;
+  background-color: #000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.home {
+  color: #fff;
+}
+
+#logo {
+  font: 60px "Lucida Grande", 'Fredoka One', cursive;
+  margin-top: 60px;
+  margin-left: 10px;
+  font-family: 'Fredoka One', cursive;
+  z-index: 10;
+}
+
+#login {
+  margin-top: 0px;
+}
+
+#bs-example-navbar-collapse-1 {
+  border-bottom: 1px solid #ddd;
 }

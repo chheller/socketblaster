@@ -12,31 +12,32 @@ html
   link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css') 
   link(rel='stylesheet', href='stylesheets/shop-homepage.css')
   link(rel='stylesheet', href='stylesheets/Dashboard.css')
-  block navBar
-   nav(class='navbar navbar-default', role='navigation')
-    .container-fluid
-     .navbar-header
-      button(class='navbar-toggle', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-       span.sronly
-       span.icon-bar
-       span.icon-bar
-       span.icon-bar
-      a(class='navbar-brand', href='/') Socket Blaster
-     #bs-example-navbar-collapse-1(class='collapse navbar-collapse')
-      ul(class='nav navbar-nav')
-       li
-        a#browse(href='/browse') Browse
-       li
-        a#cha(href='/about') Chat
-       li
-        a#postL(href='/createlisting') Post Listing
-       li
-        a#userName(href="/")
-       li
-        a#signOut(href="#") Sign Out 
-
-   script(src='/javascripts/login.js')
+  link(href='https://fonts.googleapis.com/css?family=Fredoka+One', rel='stylesheet', type='text/css')
+  link(rel="shortcut icon" href="images/logo2.png")
+  script(src='/javascripts/login.js')
+block navBar
+ nav(class='navbar navbar-default', role='navigation')
+  .container-fluid
+   .navbar-header
+    button(class='navbar-toggle', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+     span.sronly
+     span.icon-bar
+     span.icon-bar
+     span.icon-bar
+    a(class='navbar-brand', href='/') Socket Blaster
+   #bs-example-navbar-collapse-1(class='collapse navbar-collapse')
+    ul(class='nav navbar-nav')
+     li
+      a#browse(href='/browse') Browse
+     li
+      a#cha(href='/about') Chat
+     li
+      a#postL(href='/createlisting') Post Listing
+     li
+      a#userName(href="/Dashboard")
+     li
+      a#signOut(href="#") Sign Out 
   block pageTitle
    h1 The title goes here
   block pageContent
-   p.lead.centered content goes here
+  //-  p.lead.centered content goes here

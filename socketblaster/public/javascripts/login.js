@@ -18,7 +18,7 @@ $(document).ready(function () {
             if (response.msg == 'true') {
               sessionStorage.setItem('user', userEmail);  //Set session storage data for user
               sessionStorage.setItem('login', "true");    //Set session storage data for logged in
-              location.reload();
+              location.href = '/dashboard';
             }
             else {
               alert('Error: ' + response.msg);
@@ -33,7 +33,7 @@ $(document).ready(function () {
     $("#signOut").click(function () {
         sessionStorage.setItem('user', "");
         sessionStorage.setItem('login', "false");
-        location.reload();
+        location.href = '/';
     });
 
     $("#btnAddUser").click(function () {

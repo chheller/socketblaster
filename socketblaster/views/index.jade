@@ -8,67 +8,50 @@ mixin storeItem(source, name, price, description)
 				h4=name
 				p=description
 block pageTitle
-	.container
-		div.row
-			#login.col-md-3
-				//- form(name="login", action="/", method="post")
-				h3(class="form-signin-heading") Sign in
-				input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
-				input(type="password", id="inputpassword", class="form-control", placeholder="Password")
-				br
-				input(type="submit", value="login", class="btn btn-lg btn-primary btn-block", id="loginButton")
-
-				h3(class="form-signin-heading") New? Signup today!
-				#addUser
-					input#inputUserName(type='text', placeholder='Username', class="form-control")
-					input#inputUserEmail(type='text', placeholder='Email Address', class="form-control")
-					input#inputUserFullname(type='text', placeholder='Full Name', class="form-control")
-					input#inputPassword(type='password', placeholder='Password', class="form-control")
-					input(type="password", id="inputpasswordconf", class="form-control", placeholder="Re-enter Password")
-					br
-					button#btnAddUser(class="btn btn-lg btn-primary btn-block") Register
-			div.col-md-9
-				br
-				br
-				br
-				br
-				#myCarousel.carousel.slide(data-ride="carousel")
-					.carousel-inner
-						.item.active
-							img(src="http://placehold.it/1200x600",alt="first slide")
-						.item
-							img(src="http://placehold.it/1200x600",alt="second slide")
-						.item
-							img(src="http://placehold.it/1200x600",alt="third slide")
-
-					ol.carousel-indicators
-						li.active(data-target="#myCarousel", data-slide-to="0")
-						li(data-target="#myCarousel", data-slide-to="1")
-						li(data-target="#myCarousel", data-slide-to="2")
-					a.left.carousel-control(href="#myCarousel", role="button", data-slide="prev")
-						span.glyphicon.glyphicon-chevron-left
-					a.right.carousel-control(href="#myCarousel", role="button", data-slide="next")
-						span.glyphicon.glyphicon-chevron-right
-
-block pageContent
-	div.row.container
-		div.col-md-4
-		div.col-md-4
-			// USER LIST
-			//
-				h2 User List
-				#userList
-					table
-							thead
-									th UserName
-									th Email
-									th Delete?
-							tbody
-			// /USER LIST
-		div.col-md-4
-			// LISTINGS LIST
-	.container
-		div.row
-			h2 Listings
-			#listings
-			// /LISTINGS LIST 
+	#backGround
+		.container
+			div.home
+				div.row
+					h2#logo Socket Blaster
+					p.col-md-8 Welcome to Socket Blaster! We are dedicated to transforming the online retail experience by bringing tranformative tools to the table. Smart tools such as real-time messaging as well as easy user experience make Socket Blaster a premier locally based e-commerce site.
+				h4 Live. Create. Provide. 
+				div.row
+					#login
+						#addUser.col-md-4
+							h3(class="form-signin-heading") New? Signup today!
+							input#inputUserName(type='text', placeholder='Username', class="form-control")
+							input#inputUserEmail(type='text', placeholder='Email Address', class="form-control")
+							input#inputUserFullname(type='text', placeholder='Full Name', class="form-control")
+							input#inputPassword(type='password', placeholder='Password', class="form-control")
+							input(type="password", id="inputpasswordconf", class="form-control", placeholder="Re-enter Password")
+							br
+							button#btnAddUser(class="btn btn-lg btn-primary btn-block") Register
+						div.col-md-4
+							//- form(name="login", action="/", method="post")
+							h3(class="form-signin-heading") Sign in
+							input(type="email", id="inputemail", class="form-control", placeholder="Email Address")
+							input(type="password", id="inputpassword", class="form-control", placeholder="Password")
+							br
+							input(type="submit", value="login", class="btn btn-lg btn-primary btn-block", id="loginButton")
+					div.col-md-9
+						br
+						br
+						br
+						br
+						//- #myCarousel.carousel.slide(data-ride="carousel")
+						//- 	.carousel-inner
+						//- 		.item.active
+						//- 			img(src="http://placehold.it/1200x600",alt="first slide")
+						//- 		.item
+						//- 			img(src="http://placehold.it/1200x600",alt="second slide")
+						//- 		.item
+						//- 			img(src="http://placehold.it/1200x600",alt="third slide")
+						//- 
+						//- 	ol.carousel-indicators
+						//- 		li.active(data-target="#myCarousel", data-slide-to="0")
+						//- 		li(data-target="#myCarousel", data-slide-to="1")
+						//- 		li(data-target="#myCarousel", data-slide-to="2")
+						//- 	a.left.carousel-control(href="#myCarousel", role="button", data-slide="prev")
+						//- 		span.glyphicon.glyphicon-chevron-left
+						//- 	a.right.carousel-control(href="#myCarousel", role="button", data-slide="next")
+						//- 		span.glyphicon.glyphicon-chevron-right
