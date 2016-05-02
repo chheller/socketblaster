@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var clients = {};
+var multer = require('multer');
+var upload = multer({ dest: './uploads/' });
   module.exports = function(io) {
 
     io.on( "connection", function( socket )
@@ -87,4 +89,7 @@ router.get('/Dashboard', function(req, res, next) {
 });
 router.get('/Browse', function(req, res, next) {
   res.render('Browse', { title: 'Browse Listings' });
+});
+router.post('/createlisting', upload.single("userPhoto"), function(req, res){
+  console.dir(req.file);
 });
