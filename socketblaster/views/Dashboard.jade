@@ -39,9 +39,9 @@ block pageContent
             #Accountinfo
             .list-group.panel
               .panel-heading  Account Info
-              .panel-body     Username: "username"
+              #username.panel-body     Username: "username"
               #email.panel-body  Email: "user email"
-              .panel-body Listings Posted: "number"
+              #number.panel-body Listings Posted: "number"
               
             #ChangeInfo.initiallyHidden
               h3 To change your information fill out the Fields below
@@ -73,17 +73,22 @@ block pageContent
               .panel-heading  Recent Messages
               .panel-body.btn-md.btn-default  Message 1
               .panel-body.btn-md.btn-default  Message 2
-  script.      //get user email
-    var email = sessionStorage.getItem('user');
-    document.getElementById('email').innerHTML = "Email: " + email;
-    //get user info to get username
-    console.log("Test");
-    $.getJSON('/listings/findlistings/Arkansas', function(data){
-      console.log(data);
-    })
+              
+    script.      //get user email
+      var userEmail = sessionStorage.getItem('user');
+      var username = "test"; 
     
-    function toggle(param){
+      $.getJSON( '/users/getuser/' + userEmail, function( data ) {
+        username = data[0].username;
+        document.getElementById("email").innerHTML = "Email: " + userEmail;
+        document.getElementById("username").innerHTML = "Username: " + username;
+        });
       
-    }
-    
-                      
+      $.getJSON( '/listings/finduserlistings/' + userEmail, function( data ) {
+        console.log(data.num);
+        document.getElementById('number').innerHTML = "Post: " + data.num;
+        });
+     
+   
+   
+   
