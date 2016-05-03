@@ -2,18 +2,13 @@
 extends layout
 
 block pageTitle
-	br
-	br
-	br
-	br
-	
-block pageContent		
-	#postform
-		div.row
-		div.col-md-1
-		div.col-md-3
-			h3 Create a Listing!
-			#addListing
+	div.row.jumbotron
+		div.col-md-12 Create a Listing!
+block pageContent
+	div.row
+	div.col-md-1
+	div.col-md-3
+		#addListing
 			label Item Name
 			input#inputItemName(type='text', placeholder='Item Name', class="form-control")
 			label Item Price
@@ -72,5 +67,16 @@ block pageContent
 				option West Virginia 
 				option Wisconsin 
 				option Wyoming
-			button#btnAddListing(class="btn btn-lg btn-primary btn-block", style="margin-top: 25px;") Post Listing
-		script(src='/javascripts/addlistings.js')
+			label(for="cat") Item Category
+			select.form-control#cat
+				option All
+				option Electronics 
+				option Clothing
+				option Accessories
+				option Entertainment/Media
+				option Hobby/Crafts
+				option Books
+				option Other
+			br
+			button#btnAddListing(class="btn btn-lg btn-primary btn-block") Post Listing
+	script(src='/javascripts/addlistings.js')

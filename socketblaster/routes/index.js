@@ -92,4 +92,19 @@ router.get('/Browse', function(req, res, next) {
 });
 router.post('/createlisting', upload.single("userPhoto"), function(req, res){
   console.dir(req.file);
+  var newListing = {
+      'name': req.body.itemname,
+      'price': req.body.itemprice,
+      'description': req.body.itemdescription,
+      'location': req.body.itemlocation,
+      'user' : req.session.user
+  }
+
+  var db = req.db;
+  var collection = db.get('listings');
+  collection.insert(neWListing, function(err, result){
+      res.send(
+          (err === null) ? { msg: '' } : { msg: err }
+      );
+  });
 });

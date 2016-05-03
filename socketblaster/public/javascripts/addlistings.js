@@ -10,13 +10,13 @@ function addListing(event) {
     event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
-    var errorCount = 0;
-    $('#addListing input').each(function(index, val) {
-        if($(this).val() === '') { errorCount++; }
-    });
+    // var errorCount = 0;
+    // $('#addListing input').each(function(index, val) {
+    //     if($(this).val() === '') { errorCount++; console.log($('#sel1').val());}
+    // });
 
     // Check and make sure errorCount's still at zero
-    if(errorCount === 0) {
+    // if(errorCount === 0) {
 
         // If it is, compile all user info into one object
         var newListing = {
@@ -62,10 +62,10 @@ function addListing(event) {
         else {
           alert("Please enter a valid number as the price.");
         }
-    }
-    else {
-        // If errorCount is more than 0, error out
-        alert('Please fill in all fields');
-        return false;
-    }
+    // }
+    // else {
+    //     // If errorCount is more than 0, error out
+    //     alert('Please fill in all fields');
+    //     return false;
+    // }
 };

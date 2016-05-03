@@ -69,7 +69,7 @@ function populateListings() {
             // var myPath = "http://placehold.it/320x150";
 
             listingContent += '<div class="col-sm-4">'
-            listingContent +=	'<div class="thumbnail"><div class="images"></div>';
+            listingContent +=	'<div class="thumbnail"><div class="images"><img src="/listimgs/' + this.name + '.png" alt="blah" style="max-width: 100%;"></img></div>';
             listingContent += '<div class="caption">';
             listingContent += '<h4 class="pull-right"> $' + this.price + ' </h4>'
             listingContent += '<h4>' + this.name + ' </h4>';

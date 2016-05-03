@@ -13,7 +13,7 @@ block pageContent
 				#convos
 				br
 				label Past Messages: 
-				#test Test this.
+				#msgs
 		
 	#page-content-wrapper
 		.container
@@ -56,19 +56,20 @@ block pageContent
 						
 	script.
 		
-		function populateContacts(selectedName) {
-			var userEmail = sessionStorage.getItem('user', userEmail);
+		function populateContacts(selectedName, theUN) {
 			
 			var convoContent = "";
 			var convoNames = [];
 			var messageContent = "";
 			var messages = [];
+			
 		
 			
 			// Use AJAX to get the conversations from the database
-			$.getJSON( '/conversations/findmsgs/' + userEmail, function( data ) {
+			$.getJSON( '/conversations/findmsgs/' + theUN, function( data ) {
 				$.each(data, function(){
-					if(this.sender == userEmail) {
+					
+					if(this.sender == theUN) {
 						var doesit = convoNames.indexOf(this.username);
 						if(doesit == -1) {
 							convoNames.push(this.username);
@@ -79,120 +80,124 @@ block pageContent
 							convoNames.push(this.sender);
 						}
 					}
-				});
-				
-				convoNames.forEach(function(currentValue,index,arr){
-					convoContent += '<a class="msguser" rel="try@test" onclick="populateContacts(\'' + currentValue + '\')">' + currentValue + '</a></br>';
-				})
-
-				$.each(data, function(){
+					
 					if((this.sender == selectedName) || (this.username == selectedName)){
 						messageContent += '<p>' + this.sender + ": "+ this.msg; + '</p>';
 					}
+					
 				});
+				
+				convoNames.forEach(function(currentValue,index,arr){
+					convoContent += '<a class="msguser" onclick="populateContacts(\'' + currentValue + '\', \'' + theUN + '\')">' + currentValue + '</a></br>';
+				})
 
 				document.getElementById("convos").innerHTML = convoContent;
-				document.getElementById("test").innerHTML = messageContent;
+				document.getElementById("msgs").innerHTML = messageContent;
 				
 			});
 		};
 		
+		// HERE STARTS THE REGULAR JAVASCRIPT
 		var userEmail = sessionStorage.getItem('user', userEmail);
 		
 		if(userEmail != null && userEmail != "")
 		{
-			populateContacts("");
-		
-			var socket = io.connect('socketblaster.com');
-			socket.on("connect", function() {
-				
-				socket.emit("add-user", {"username": userEmail});
-				
-				var chat_form = $(".chat-form");
-				chat_form.show();
-				chat_form.on("submit", function(){
-					// Send the message to the server
-					socket.emit("private-message", {
-						"username": $(this).find("input:first").val(),
-						"sender": userEmail,
-						"msg": $(this).find("textarea").val(),
-						"content": "Received from " + userEmail + ": " + $(this).find("textarea").val()
+			$.getJSON( '/users/getuser/' + userEmail, function( data ) {
+				theUN = data[0].username;
+
+				populateContacts("", theUN);
+			
+				var socket = io.connect('socketblaster.com');
+				socket.on("connect", function() {
+					
+					socket.emit("add-user", {"username": theUN});
+					
+					var chat_form = $(".chat-form");
+					chat_form.show();
+					chat_form.on("submit", function(){
+						// Send the message to the server
+						socket.emit("private-message", {
+							"username": $(this).find("input:first").val(),
+							"sender": theUN,
+							"msg": $(this).find("textarea").val(),
+							"content": "Received from " + theUN + ": " + $(this).find("textarea").val()
+						});
+						
+						//$('#messages').append($('<li>').text("Sent to " + $("#recipient").val() + ": " + $('#message').val()));
+						
+						var d = new Date();
+						var n = d.getTime();
+						
+						// Send the message to the DB
+						// compile all message data into JSON
+						var newMessage = {
+							"username": $(this).find("input:first").val(),
+							"sender": theUN,
+							"msg": $('#message').val(),
+							"ts": n
+						};
+						
+						
+						// Use AJAX to post the object to our conversations collection in the database
+						$.ajax({
+								type: 'POST',
+								data: newMessage,
+								url: '/conversations/new',
+								dataType: 'JSON'
+						}).done(function( response ) {});
+						
+						populateContacts($(this).find("input:first").val(), theUN);
+
+						// Empty the form
+						$(this).find("textarea").val('');
+
+						return false;
 					});
 					
-					//$('#messages').append($('<li>').text("Sent to " + $("#recipient").val() + ": " + $('#message').val()));
+					// Whenever we receieve a message, append it to the <ul>
+					socket.on("add-message", function(data){
+						if(data == "user does not exist")
+						{
+							$("#messages").append($("<li>", {
+								"text": data
+							}));
+						}
+						else
+						{
+							$("#messages").append($("<li>", {
+								"text": data.content
+							}));
+						}
+					});
 					
-					var d = new Date();
-					var n = d.getTime();
+					socket.on("send-confirmation", function(data){
 					
-					// Send the message to the DB
-					// compile all message data into JSON
-					var newMessage = {
-						"username": $(this).find("input:first").val(),
-						"sender": userEmail,
-						"msg": $('#message').val(),
-						"ts": n
-					};
+						$('#messages').append($('<li>').text(data));
+							
+					});
 					
-					
-					// Use AJAX to post the object to our conversations collection in the database
-					$.ajax({
-							type: 'POST',
-							data: newMessage,
-							url: '/conversations/new',
-							dataType: 'JSON'
-					}).done(function( response ) {});
-					
-					populateContacts($(this).find("input:first").val());
-
-					// Empty the form
-					$(this).find("textarea").val('');
-
-					return false;
-				});
-				
-				// Whenever we receieve a message, append it to the <ul>
-				socket.on("add-message", function(data){
-					if(data == "user does not exist")
-					{
-						$("#messages").append($("<li>", {
-							"text": data
-						}));
-					}
-					else
-					{
-						$("#messages").append($("<li>", {
-							"text": data.content
-						}));
-					}
-				});
-				
-				socket.on("send-confirmation", function(data){
-				
-					$('#messages').append($('<li>').text(data));
+					socket.on("user-connected", function(data){
 						
-				});
-				
-				socket.on("user-connected", function(data){
-					
-					$("#users").append($("<li>", {
-						"text": data.username
-					}));
-		
-				});
-				
-				socket.on("currentUser-list", function(data){
-					$("#users").text("");
-					var str = JSON.stringify(data);
-					
-					str = str.slice(1, -1);
-					var allUsers = str.split("-");
-					
-					for(var x = 0; x < allUsers.length - 1; x++)
-					{
 						$("#users").append($("<li>", {
-							"text": allUsers[x]
+							"text": data.username
 						}));
-					}
+			
+					});
+					
+					socket.on("currentUser-list", function(data){
+						$("#users").text("");
+						var str = JSON.stringify(data);
+						
+						str = str.slice(1, -1);
+						var allUsers = str.split("-");
+						
+						for(var x = 0; x < allUsers.length - 1; x++)
+						{
+							$("#users").append($("<li>", {
+								"text": allUsers[x]
+							}));
+						}
+					});
 				});
 			});
 		}
