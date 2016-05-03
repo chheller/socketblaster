@@ -21,7 +21,8 @@ router.get('/finduserlistings/:email', function(req, res) {
   console.log("searching for: " + email);
   collection.find({ 'user' : email }, {}, function(e,docs){
     if(e === null) {
-      if(docs[0] != null) {
+      if(docs.length != null) {
+        console.log("In here");
         console.log(docs.length);
         res.send( { num: docs.length } );
       }
