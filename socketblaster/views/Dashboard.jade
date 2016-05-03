@@ -85,8 +85,8 @@ block pageContent
           #acctinfo
             .list-group.panel
               .panel-heading  Account Info
-              .panel-body  Username: "user username"
-              .panel-body  Email: "user email"
+              #username.panel-body  Username: "user username"
+              #email.panel-body  Email: "user email"
               .panel-body  User since: "reg date"
           #listinginfo
             .list-group.panel
@@ -99,4 +99,16 @@ block pageContent
               .panel-body.btn-md.btn-default  Message 1
               .panel-body.btn-md.btn-default  Message 2
 
-                      
+  script.
+    var userEmail = sessionStorage.getItem("user");
+    var username = "";
+    
+    $.getJSON( '/users/getuser/' + userEmail, function( data ) {
+          console.log("test");
+          username = data[0].username;
+          document.getElementById("email").innerHTML = "Email: " + userEmail;
+          document.getElementById("username").innerHTML = "Username: " + username;
+    });
+    
+
+    

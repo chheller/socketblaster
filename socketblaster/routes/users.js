@@ -57,5 +57,19 @@ router.delete('/deleteuser/:id', function(req, res) {
     });
 });
 
+router.get('/getuser/:email', function(req, res) {
+  console.log("hit getuser")
+  var db = req.db;
+  var collection = db.get('userlist');
+  var email = req.params.email;
+  collection.find({ 'email' : email }, {}, function(e,docs){
+    if(e === null) {
+      if(docs[0] != null) {
+        res.json(docs);
+      }
+      else {res.send( { msg: "No Listings."} )}
+    }
+  });
+});
 
 module.exports = router;

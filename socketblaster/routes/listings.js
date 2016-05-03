@@ -12,29 +12,56 @@ router.get('/listings', function(req, res) {
     });
 });
 
-router.get('/findlistings/:loc', function(req, res) {
+router.get('/findlistings/:loc/:cat', function(req, res) {
   var db = req.db;
   var collection = db.get('listings');
   var location = req.params.loc;
+  var category = req.params.cat;
+  var lquery = "location : " + location;
+  
   if(location == "All") {
-    collection.find({}, { 'location' : { $exists : true }}, function(e,docs){
-      if(e === null) {
-        if(docs[0] != null) {
-          res.json(docs);
+    if(category == "All") {
+      collection.find({}, {}, function(e,docs){
+        if(e === null) {
+          if(docs[0] != null) {
+            res.json(docs);
+          }
+          else {res.send( { msg: "No Listings."} )}
         }
-        else {res.send( { msg: "No Listings."} )}
-      }
-    });
+      });
+    }
+    else {
+      collection.find({ 'category' : category }, {}, function(e,docs){
+        if(e === null) {
+          if(docs[0] != null) {
+            res.json(docs);
+          }
+          else {res.send( { msg: "No Listings."} )}
+        }
+      });
+    }
   }
   else {
-    collection.find({ 'location' : location }, { 'location' : { $exists : true }}, function(e,docs){
-      if(e === null) {
-        if(docs[0] != null) {
-          res.json(docs);
+    if(category == "All") {
+      collection.find({ 'location' : location }, {}, function(e,docs){
+        if(e === null) {
+          if(docs[0] != null) {
+            res.json(docs);
+          }
+          else {res.send( { msg: "No Listings."} )}
         }
-        else {res.send( { msg: "No Listings."} )}
-      }
-    });
+      });
+    }
+    else {
+      collection.find({ 'location' : location, 'category' : category }, {}, function(e,docs){
+        if(e === null) {
+          if(docs[0] != null) {
+            res.json(docs);
+          }
+          else {res.send( { msg: "No Listings."} )}
+        }
+      });
+    }
   }
 });
 

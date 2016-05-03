@@ -24,6 +24,7 @@ function addListing(event) {
             'price': $('#addListing input#inputItemPrice').val(),
             'description': $('#addListing input#inputItemDesc').val(),
             'location': $('#addListing select#sel1').val(),
+            'category': $('#addListing select#cat').val(),
             'user' : sessionStorage.getItem('user')
         }
 

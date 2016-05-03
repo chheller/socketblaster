@@ -65,6 +65,16 @@ block pageContent
 			option West Virginia 
 			option Wisconsin 
 			option Wyoming
+		label(for="cat") Item Category
+		select.form-control#cat
+			option All
+			option Electronics 
+			option Clothing
+			option Accessories
+			option Entertainment/Media
+			option Hobby/Crafts
+			option Books
+			option Other
 		br
 		button#btnAddListing(class="btn btn-lg btn-primary btn-block") Post Listing
 	script(src='/javascripts/addlistings.js')

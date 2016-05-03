@@ -18,6 +18,7 @@ function filterListing(event) {
   if(errorCount === 0) {
 
       var location = $('#sel1').val();
+      var category = $('#cat').val();
       var extension =  '/listings/findlistings/' + location;
 
       // Empty content string
@@ -25,7 +26,7 @@ function filterListing(event) {
       var i = 0;
 
       // jQuery AJAX call for JSON
-      $.getJSON( '/listings/findlistings/' + location, function( data ) {
+      $.getJSON( '/listings/findlistings/' + location + '/' + category, function( data ) {
 
         // Stick our user data array into a userlist variable in the global object
         listingData = data;

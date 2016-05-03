@@ -13,6 +13,7 @@ block pageContent
 	.container
 		div.row
 			div.col-md-4
+				br
 				label(for="sel1") Item Location
 				select.form-control#sel1
 					option All
@@ -66,6 +67,17 @@ block pageContent
 					option West Virginia 
 					option Wisconsin 
 					option Wyoming
+				br
+				label(for="cat") Item Category
+				select.form-control#cat
+					option All
+					option Electronics 
+					option Clothing
+					option Accessories
+					option Entertainment/Media
+					option Hobby/Crafts
+					option Books
+					option Other
 				br
 				input(type="submit", value="Submit", class="btn btn-lg btn-primary btn-block", id="submitLocation")
 		br
