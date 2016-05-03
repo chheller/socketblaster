@@ -11,6 +11,9 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/nodetest2');
 
+//multer stuff for image upload
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var listings = require('./routes/listings');
@@ -18,6 +21,7 @@ var conversations = require('./routes/conversations');
 
 var app = express();
 app.io = require('socket.io')();
+//app.use(multer({dest:'./uploads/'}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
