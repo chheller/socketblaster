@@ -3,7 +3,6 @@ extends layout
 block pageTitle
 
 block pageContent
-
   //LEFTSIDE ACCORDIAN MENU
   .container-fluid.text-center.nopadding
     .wrapper
@@ -12,67 +11,55 @@ block pageContent
             .list-group.panel
 
               // ACCORDIAN FOR ACCOUNT SETTINGS
-              a.list-group-item.list-group-item-success(href='#AccountSettings', data-toggle= "collapse") Account Settings
+              a.list-group-item.list-group-item-success(href='#AccountSettings') Account Settings
                 i.fa.fa-caret-down
               #AccountSettings.collapse.in
-                panel.button.list-group-item(href='#ChangeInfo', data-toggle= "collapse") Change Account Information
-                panel.button.list-group-item(href='#PasswordRecovery', data-toggle= "collapse")  Password Recovery
-                panel.button.list-group-item(href='#ManageMembership', data-toggle= "collapse") Manage Membership
-                panel.button.list-group-item(href='#ManagePayments', data-toggle= "collapse")  Manage Payment Options
-
+                panel.list-group-item.btn-default(href='#ChangeInfo', data-toggle= "collapse") Change Account Information
+                panel.list-group-item.btn-default(href='#ManageMembership', data-toggle= "collapse") Manage Membership
+                
               // ACCORDIAN FOR LISTINGS
               a.list-group-item.list-group-item-success(href='#Listings', data-toggle= "collapse")
                 | Listings
                 i.fa.fa-caret-down
               #Listings.collapse.in
-                panel.button.list-group-item(href='#ViewBuy', data-toggle= "collapse") View Buy Orders
-                panel.button.list-group-item(href='#ViewSale', data-toggle= "collapse") View Your Sales
-                panel.button.list-group-item(href='#ShoppingList', data-toggle= "collapse") View Shopping List
-                panel.button.list-group-item(href='#TransactionHistory', data-toggle= "collapse") View Transaction History
-
+                panel.list-group-item.btn-default(href='#ViewSale', data-toggle= "collapse") View Your Sales
+                panel.button.list-group-item.btn-default(href='#ShoppingList', data-toggle= "collapse") View Shopping List
               // ACCORDIAN FOR OPTIONS
               a.list-group-item.list-group-item-success(href='#Messages', data-toggle= "collapse")  Messages
                 i.fa.fa-caret-down
               #Messages.collapse.in
-                panel.button.list-group-item(href='#ActiveConv', data-toggle= "collapse") Active Conversations
-                panel.button.list-group-item(href='#MessageHistory', data-toggle= "collapse") Message History
+                panel.list-group-item.btn-default(href='#ActiveConv', data-toggle= "collapse") Active Conversations
+                panel.list-group-item.btn-default(href='#MessageHistory', data-toggle= "collapse") Message History
                 
         div.row.col-md-2
-        div.row.col-md-4
+        
+        div.row.col-md-5
           #MiddleContent
-            //p  THIS IS ALWAYS HERE
             
+            #Accountinfo
+            .list-group.panel
+              .panel-heading  Account Info
+              #username.panel-body     Username: "username"
+              #email.panel-body  Email: "user email"
+              #number.panel-body Listings Posted: "number"
+              
             #ChangeInfo.initiallyHidden
               h3 To change your information fill out the Fields below
               #changeuserinfo
-              input#inputUserName(type='text', placeholder='Change Username', class="form-control")
-              input#inputUserEmail(type='text', placeholder='Change Email', class="form-control")
-              input#inputPassword(type='password', placeholder='New Password', class="form-control")
+              input#changeUserEmail(type='text', placeholder='Change Email', class="form-control")
+              input#changePassword(type='password', placeholder='New Password', class="form-control")
               input(type="password", id="inputpasswordconf", class="form-control", placeholder="Re-enter Password")
               br
-              button#btnAddUser(class="btn btn-lg btn-primary btn-block") Change Account Info
-              
-            #PasswordRecovery.initiallyHidden
-              br
-              p Here is the content for changing your password
-              
+              button#btnChngInfo(class="btn btn-lg btn-primary btn-block") Change Account Info
+                            
             #ManageMembership.initiallyHidden
               p Manage Membership
-            
-            #ManagePayments.initiallyHidden
-              p Manage Payments
-              
-            #ViewBuy.initiallyHidden
-              p View Buy Orders
-            
+
             #ViewSale.initiallyHidden
               p View Sales
               
             #ShoppingList.initiallyHidden
               p View Shopping List
-            
-            #TransactionHistory.initiallyHidden
-              p Transaction HIstory here
               
             #ActiveConv.initiallyHidden
               p List of active Conversations
@@ -83,32 +70,25 @@ block pageContent
         div.row.col-md-2
         div.row.col-md-2.rightnav.sidenav
           #acctinfo
-            .list-group.panel
-              .panel-heading  Account Info
-              #username.panel-body  Username: "user username"
-              #email.panel-body  Email: "user email"
-              .panel-body  User since: "reg date"
-          #listinginfo
-            .list-group.panel
-              .panel-heading  Listing Info
-              .panel-body Sell Listings Posted: "number"
-              .panel-body  Buy Listings  Posted: "number"
-          #messginfo
-            .list-group
               .panel-heading  Recent Messages
               .panel-body.btn-md.btn-default  Message 1
               .panel-body.btn-md.btn-default  Message 2
-
-  script.
-    var userEmail = sessionStorage.getItem("user");
-    var username = "";
+              
+    script.      //get user email
+      var userEmail = sessionStorage.getItem('user');
+      var username = "test"; 
     
-    $.getJSON( '/users/getuser/' + userEmail, function( data ) {
-          console.log("test");
-          username = data[0].username;
-          document.getElementById("email").innerHTML = "Email: " + userEmail;
-          document.getElementById("username").innerHTML = "Username: " + username;
-    });
-    
-
-    
+      $.getJSON( '/users/getuser/' + userEmail, function( data ) {
+        username = data[0].username;
+        document.getElementById("email").innerHTML = "Email: " + userEmail;
+        document.getElementById("username").innerHTML = "Username: " + username;
+        });
+      
+      $.getJSON( '/listings/finduserlistings/' + userEmail, function( data ) {
+        console.log(data.num);
+        document.getElementById('number').innerHTML = "Post: " + data.num;
+        });
+     
+   
+   
+   

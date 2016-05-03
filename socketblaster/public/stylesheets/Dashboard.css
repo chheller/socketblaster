@@ -1,0 +1,50 @@
+a.list-group-item, .panel-heading{
+        color: black;
+        background-color: #f1e6da ;
+}
+
+.panel-heading{
+
+}
+
+b.list-group-item{
+
+}
+
+body{
+  background-color:  #eaeaea;
+}
+
+#MiddleContent{
+  padding-top: 50px;
+}
+.rightnav, .leftnav{
+     padding-top: 50px;
+     padding-bottom: 40px;
+     background-color: #eaeaea;
+     height: 100%;
+   }
+.rightnav{
+  float: right;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  border-radius: 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+
+.wrapper {
+ height: 650px
+}
+
+.footer {
+  width: 100%;
+  background-color: black;
+}
+
+.initiallyHidden {
+  display: none;
+}

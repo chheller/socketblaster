@@ -20,13 +20,15 @@ function addListing(event) {
 
         // If it is, compile all user info into one object
         var newListing = {
-            'name': $('#addListing input#inputItemName').val(),
-            'price': $('#addListing input#inputItemPrice').val(),
-            'description': $('#addListing input#inputItemDesc').val(),
-            'location': $('#addListing select#sel1').val(),
-            'category': $('#addListing select#cat').val(),
+            'name': $('#inputItemName').val(),
+            'price': $('#inputItemPrice').val(),
+            'description': $('#inputItemDesc').val(),
+            'location': $('#sel1').val(),
+            'category': $('#cat').val(),
             'user' : sessionStorage.getItem('user')
         }
+
+        console.log(newListing);
 
         if(!isNaN(newListing.price)) {
 

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 /*
  * GET listings.
  */
@@ -12,12 +13,34 @@ router.get('/listings', function(req, res) {
     });
 });
 
+router.get('/finduserlistings/:email', function(req, res) {
+  console.log("hit find user listings")
+  var db = req.db;
+  var collection = db.get('listings');
+  var email = req.params.email;
+  console.log("searching for: " + email);
+  collection.find({ 'user' : email }, {}, function(e,docs){
+    if(e === null) {
+      if(docs.length != null) {
+        console.log("In here");
+        console.log(docs.length);
+        res.send( { num: docs.length } );
+      }
+      else {
+        console.log("error");
+        res.send( { msg: "No Listings."} );
+      }
+    }
+  });
+});
+
 router.get('/findlistings/:loc/:cat', function(req, res) {
   var db = req.db;
   var collection = db.get('listings');
   var location = req.params.loc;
   var category = req.params.cat;
   var lquery = "location : " + location;
+
   if(location == "All") {
     if(category == "All") {
       collection.find({}, {}, function(e,docs){
