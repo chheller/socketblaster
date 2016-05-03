@@ -1,55 +1,107 @@
 extends layout
+
 block pageTitle
-	div.row.jumbotron
-		div.col-md-12 About Us! Now testing Sockets! And other Stuff!
 block pageContent
 	br
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-1.11.1.js')
-		
-	.container
-		div.row
-			div.col-md-4
-			div.col-md-4				
-				ul(id="notLoggedIn")
-			
-				ul(id="messages-area")
-
-				form(action='' class="chat-form")
-					label(for='recipientName') Send To User: 
-					input(type='text', id='recipient')
-					br
-					br
-					label(for='message') Message: 
-					textarea(id='message')
-					br
-					<input type="submit" value="Send" class="pull-right"/>
-					br
-					br
-				label(for='messages') Messages:
-				ul(id="messages")
-				label(for='users') Users Online:
-				ul(id="users")
-				label(id = 'pastConvos') Past Conversations:
+	
+	#sidebar-wrapper
+		ul.sidebar-nav
+			li.sidebar-brand
+				label Contacts:
 				#convos
-			div.col-md-4
-			
+				br
+				label Past Messages: 
+				#test Test this.
+		
+	#page-content-wrapper
+		.container
+			div.row
+				div.col-md-4
+					br
+					div.panel.panel-default.pull-right
+						div.panel-body
+							label(for='users') Users Online:
+							ul(id="users")
+				
+				div.col-md-4		
+					ul(id="notLoggedIn")
+				
+					ul(id="messages-area")
+					
+					div.form-group
+						form(action='' class="chat-form")
+							label(for='recipientName') Send To User: 
+							input(type='text', id='recipient' class="form-control")
+							br
+							label(for='message') Message: 
+							textarea(id='message' class="form-control" style="resize: vertical")
+							br
+							<input type="submit" value="Send" class="pull-right btn btn-default"/>
+							br
+							br
+							br
+
+					
+			div.row
+				div.col-md-4
+				div.col-md-4
+					br
+					div.panel.panel-default
+						div.panel-body
+							label(for='messages') Messages:
+							ul(id="messages")
+
+						
 	script.
 		
-		var userEmail = sessionStorage.getItem('user', userEmail);
-		if(userEmail != null && userEmail != "")
-		{
+		function populateContacts(selectedName) {
+			var userEmail = sessionStorage.getItem('user', userEmail);
+			
 			var convoContent = "";
+			var convoNames = [];
+			var messageContent = "";
+			var messages = [];
 		
+			
 			// Use AJAX to get the conversations from the database
 			$.getJSON( '/conversations/findmsgs/' + userEmail, function( data ) {
 				$.each(data, function(){
-					convoContent += '<p>' + this.sender + " to " + this.username + ": "+ this.msg;
-					convoContent += '<p>Messages sent: ' + this.msg.length;
+					if(this.sender == userEmail) {
+						var doesit = convoNames.indexOf(this.username);
+						if(doesit == -1) {
+							convoNames.push(this.username);
+						}
+					}
+					else {
+						if(convoNames.indexOf(this.sender) == -1) {
+							convoNames.push(this.sender);
+						}
+					}
 				});
-				console.log(convoContent);
+				
+				convoNames.forEach(function(currentValue,index,arr){
+					convoContent += '<a class="msguser" rel="try@test" onclick="populateContacts(\'' + currentValue + '\')">' + currentValue + '</a></br>';
+				})
+
+				$.each(data, function(){
+					if((this.sender == selectedName) || (this.username == selectedName)){
+						messageContent += '<p>' + this.sender + ": "+ this.msg; + '</p>';
+					}
+				});
+
 				document.getElementById("convos").innerHTML = convoContent;
+				document.getElementById("test").innerHTML = messageContent;
+				
 			});
+		};
+		
+		var userEmail = sessionStorage.getItem('user', userEmail);
+		
+		if(userEmail != null && userEmail != "")
+		{
+			populateContacts("");
 		
 			var socket = io.connect('socketblaster.com');
 			socket.on("connect", function() {
@@ -69,12 +121,16 @@ block pageContent
 					
 					//$('#messages').append($('<li>').text("Sent to " + $("#recipient").val() + ": " + $('#message').val()));
 					
+					var d = new Date();
+					var n = d.getTime();
+					
 					// Send the message to the DB
 					// compile all message data into JSON
 					var newMessage = {
 						"username": $(this).find("input:first").val(),
 						"sender": userEmail,
-						"msg": $('#message').val()
+						"msg": $('#message').val(),
+						"ts": n
 					};
 					
 					
@@ -85,6 +141,8 @@ block pageContent
 							url: '/conversations/new',
 							dataType: 'JSON'
 					}).done(function( response ) {});
+					
+					populateContacts($(this).find("input:first").val());
 
 					// Empty the form
 					$(this).find("textarea").val('');
@@ -146,3 +204,4 @@ block pageContent
 			$(".chat-form").hide();
 			$("#notLoggedIn").text("you must be logged in to access chat");
 		}
+		

@@ -18,7 +18,6 @@ router.get('/findlistings/:loc/:cat', function(req, res) {
   var location = req.params.loc;
   var category = req.params.cat;
   var lquery = "location : " + location;
-  
   if(location == "All") {
     if(category == "All") {
       collection.find({}, {}, function(e,docs){

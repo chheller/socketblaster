@@ -178,3 +178,59 @@ fieldset {
 #bs-example-navbar-collapse-1 {
   border-bottom: 1px solid #ddd;
 }
+
+#wrapper {
+  padding-right: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-right: -250px;
+  right: 250px;
+  top: 52px;
+  width: 350px;
+  background: #423d3a;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+  padding: 20px;
+  color: #fff
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 25;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width:767px) {
+
+    #wrapper {
+      padding-right: 0;
+    }
+
+    #sidebar-wrapper {
+      right: 0;
+    }
+
+    #wrapper.active {
+      position: relative;
+      right: 250px;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+      right: 250px;
+      width: 250px;
+      transition: all 0.4s ease 0s;
+    }
+
+}
