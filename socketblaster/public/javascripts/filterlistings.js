@@ -36,18 +36,17 @@ function filterListing(event) {
               // var myPath = "http://placehold.it/320x150";
 
               listingContent += '<div class="col-sm-4">'
-              listingContent +=	'<div class="thumbnail"><div class="images"></div>';
+              listingContent +=	'<div class="thumbnail"><div class="images"><img src="/listimgs/' + this.filename + '" alt="blah" style="max-width: 100%;"></img></div>';
               listingContent += '<div class="caption">';
               listingContent += '<h4 class="pull-right"> $' + this.price + ' </h4>'
               listingContent += '<h4>' + this.name + ' </h4>';
               listingContent += '<p>' + this.description + ' </p>';
               listingContent += '<p>' + this.location + ' </p>';
-              listingContent += '<a href="#" class="linkmessageuser">' + this.user + '</a>';
+              listingContent += '<a href="#" class="linkdeletelisting">' + this.user + '</a>';
 
-              if(sessionStorage.getItem('user') == this.user) {
-                console.log("listing found");
-                listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
-              }
+                if(sessionStorage.getItem('user') == this.user) {
+                  listingContent += '<a href="#" class="linkdeletelisting pull-right" rel="' + this._id +'">delete</a>';
+                }
 
               listingContent += '</div></div></div></div>';
 

@@ -123,8 +123,6 @@ router.post('/createlisting', upload.single("userPhoto"), function(req, res){
   console.log(newListing);
 
   collection.insert(newListing, function(err, result){
-      res.send(
-          (err === null) ? { msg: '' } : { msg: err }
-      );
+      res.render('Browse');
   });
 });
