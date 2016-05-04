@@ -2,7 +2,20 @@ var express = require('express');
 var router = express.Router();
 var clients = {};
 var multer = require('multer');
-var upload = multer({ dest: './uploads/' });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/listimgs/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.png')
+  }
+});
+
+var upload = multer({ storage: storage });
+
+
+// var upload = multer({ dest: './uploads/' });
+
   module.exports = function(io) {
 
     io.on( "connection", function( socket )
@@ -91,18 +104,25 @@ router.get('/Browse', function(req, res, next) {
   res.render('Browse', { title: 'Browse Listings' });
 });
 router.post('/createlisting', upload.single("userPhoto"), function(req, res){
+
   console.dir(req.file);
+
   var newListing = {
       'name': req.body.itemname,
       'price': req.body.itemprice,
       'description': req.body.itemdescription,
       'location': req.body.itemlocation,
-      'user' : req.session.user
-  }
+      'category' : req.body.category,
+      'user' : req.body.user,
+      'filename' : req.file.filename
+  };
 
   var db = req.db;
   var collection = db.get('listings');
-  collection.insert(neWListing, function(err, result){
+
+  console.log(newListing);
+
+  collection.insert(newListing, function(err, result){
       res.send(
           (err === null) ? { msg: '' } : { msg: err }
       );

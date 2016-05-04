@@ -1,7 +1,11 @@
   // Add Listing button click
 $('#btnAddListing').on('click', addListing);
 
+$(document).ready(function() {
 
+    $('input[name=user]').val(sessionStorage.getItem('user'));
+
+});
 
 // Add User
 function addListing(event) {
